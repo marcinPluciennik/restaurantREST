@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDate;
 
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto {
-
-    private Long cartId;
-    private List<Long> dishesIds;
+@Getter
+public class TempDto {
+    private Long tempId;
+    private LocalDate date;
+    private double temp;
 }

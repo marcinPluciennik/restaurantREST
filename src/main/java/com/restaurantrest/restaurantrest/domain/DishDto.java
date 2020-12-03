@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto {
+public class DishDto {
 
+    private Long dishId;
+    private String name;
+    private BigDecimal price;
     private Long cartId;
-    private List<Long> dishesIds;
 }

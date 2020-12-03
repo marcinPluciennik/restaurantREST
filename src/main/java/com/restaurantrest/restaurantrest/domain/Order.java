@@ -28,7 +28,7 @@ public class Order {
     @Column(name = "TOTAL_PRICE")
     private double totalPrice;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_CART_ID")
     private Cart cart;
 

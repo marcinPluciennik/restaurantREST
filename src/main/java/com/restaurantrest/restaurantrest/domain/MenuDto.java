@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto {
+public class MenuDto {
 
-    private Long cartId;
-    private List<Long> dishesIds;
+    private Long menuId;
+    private String menuName;
+    private LocalDateTime startDate;
+    private Long dishId;
 }

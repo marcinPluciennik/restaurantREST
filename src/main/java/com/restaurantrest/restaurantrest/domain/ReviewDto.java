@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartDto {
+@Getter
+public class ReviewDto {
 
-    private Long cartId;
-    private List<Long> dishesIds;
+    private Long reviewId;
+    private String reviewText;
+    private double rating;
 }

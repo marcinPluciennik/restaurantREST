@@ -1,8 +1,9 @@
 package com.restaurantrest.restaurantrest.mapper;
 
+import com.restaurantrest.restaurantrest.conroller.OrderNotFoundException;
 import com.restaurantrest.restaurantrest.domain.User;
 import com.restaurantrest.restaurantrest.domain.UserDto;
-import com.restaurantrest.restaurantrest.repository.OrderRepo;
+import com.restaurantrest.restaurantrest.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Component;
 public class UserMapper {
 
     @Autowired
-    private OrderRepo orderRepo;
+    private OrderDao orderRepo;
 
-    public User mapToUser(UserDto userDto) throws OrderNotFoundException{
+    public User mapToUser(final UserDto userDto) throws OrderNotFoundException {
         return new User(
                 userDto.getUserId(),
                 userDto.getName(),
@@ -20,10 +21,11 @@ public class UserMapper {
                 userDto.getPhone(),
                 userDto.getEmail(),
                 userDto.getDate(),
-                orderRepo.findById(userDto.getOrderId()).orElseThrow(OrderNotFoundException::new));
+                orderRepo.findById(userDto.getOrderId()).orElseThrow(OrderNotFoundException::new)
+        );
     }
 
-    public UserDto mapToUserDto(User user){
+    public UserDto mapToUserDto(final User user){
         return new UserDto(
                 user.getUserId(),
                 user.getName(),
@@ -31,6 +33,7 @@ public class UserMapper {
                 user.getPhone(),
                 user.getEmail(),
                 user.getDate(),
-                user.getOrder().getOrderId());
+                user.getOrder().getOrderId()
+        );
     }
 }

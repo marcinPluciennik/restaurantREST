@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Setter
 @Entity(name = "USERS")
 public class User {
+
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class User {
     @Column(name = "DATE")
     private LocalDate date;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_ORDER_ID")
     private Order order;
 

@@ -7,25 +7,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "CARTS")
-public class Cart {
+@Entity(name = "REVIEWS")
+public class Review {
 
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CART_ID")
-    private Long cartId;
+    @Column(name = "REVIEW_ID")
+    private Long reviewId;
 
-    @OneToMany(targetEntity = Dish.class,
-            mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<Dish> dishList = new ArrayList<>();
+    @Column(name ="REVIEW_TEXT")
+    private String reviewText;
+
+    @Column(name = "RATING")
+    private double rating;
+
+    public Review(String reviewText, double rating) {
+        this.reviewText = reviewText;
+        this.rating = rating;
+    }
 }

@@ -1,4 +1,4 @@
-package com.restaurantrest.restaurantrest.mapper;
+package com.restaurantrest.restaurantrest.conroller;
 
 public class OrderNotFoundException extends Exception{
 }

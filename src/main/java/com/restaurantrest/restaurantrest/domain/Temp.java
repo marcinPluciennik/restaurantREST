@@ -7,25 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "CARTS")
-public class Cart {
+@Entity(name = "TEMP_PRAGUE")
+public class Temp {
 
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CART_ID")
-    private Long cartId;
+    @Column(name = "TEMP_ID")
+    private Long tempId;
 
-    @OneToMany(targetEntity = Dish.class,
-            mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<Dish> dishList = new ArrayList<>();
+    @Column(name = "DATE")
+    private LocalDate date;
+
+    @Column(name = "TEMP")
+    private double temp;
+
+    public Temp(double temp) {
+        this.date = LocalDate.now();
+        this.temp = temp;
+    }
 }
