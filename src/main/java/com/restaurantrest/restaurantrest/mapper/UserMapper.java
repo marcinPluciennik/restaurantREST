@@ -7,6 +7,9 @@ import com.restaurantrest.restaurantrest.dao.OrderDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UserMapper {
 
@@ -35,5 +38,12 @@ public class UserMapper {
                 user.getDate(),
                 user.getOrder().getOrderId()
         );
+    }
+
+    public List<UserDto> mapToUserDtoList(List<User> userList){
+        return userList.stream()
+                .map(u -> new UserDto(u.getUserId(), u.getName(), u.getSurname(), u.getPhone(), u.getEmail(),
+                        u.getDate(), u.getOrder().getOrderId()))
+                .collect(Collectors.toList());
     }
 }

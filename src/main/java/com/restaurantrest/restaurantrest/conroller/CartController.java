@@ -30,13 +30,12 @@ public class CartController {
         return cartMapper.mapToCartDto(service.saveCart(cartMapper.mapToCart(cartDto)));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addDish")
+    @RequestMapping(method = RequestMethod.POST, value = "addDish", consumes = APPLICATION_JSON_VALUE)
     public CartDto addDishToCart(@RequestParam Long cartId, @RequestParam Long dishId)
             throws CartNotFoundException, DishNotFoundException {
         Cart cart = service.findCartById(cartId).orElseThrow(CartNotFoundException::new);
         Dish dish = service.findDishById(dishId).orElseThrow(DishNotFoundException::new);
         cart.getDishList().add(dish);
-        System.out.println(cart);
         return cartMapper.mapToCartDto(service.saveCart(cart));
     }
 

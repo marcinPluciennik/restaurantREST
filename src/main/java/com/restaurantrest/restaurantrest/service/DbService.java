@@ -28,19 +28,32 @@ public class DbService {
         return cartDao.save(cart);
     }
 
-    public Optional<List<Dish>> getDishesByCartId(long cartId){
+    public Optional<List<Dish>> getDishesByCartId(Long cartId){
         return dishDao.findDishesByCart_CartId(cartId);
     }
 
-    public Optional<Cart> findCartById(long cartId){
+    public Optional<Cart> findCartById(Long cartId){
         return cartDao.findById(cartId);
     }
 
-    public Optional<User> findUserById(long userId){
+    public Optional<User> findUserById(Long userId){
         return userDao.findById(userId);
     }
 
-    public Optional<Dish> findDishById(long dishId){
+    public Optional<Dish> findDishById(Long dishId){
         return dishDao.findById(dishId);
     }
+
+    public User saveUser(User user){
+        return userDao.save(user);
+    }
+
+    public List<User> getUsers(){
+        return userDao.findAll();
+    }
+
+    public void removeUserById(Long id){
+        userDao.deleteById(id);
+    }
+
 }
