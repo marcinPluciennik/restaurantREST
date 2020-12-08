@@ -28,6 +28,10 @@ public class Order {
     @Column(name = "TOTAL_PRICE")
     private double totalPrice;
 
+    @ManyToOne
+    @JoinColumn(name = "FK_USER_ID")
+    private User user;
+
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_CART_ID")
     private Cart cart;

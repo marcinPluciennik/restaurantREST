@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,12 +35,18 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "DATE")
-    private LocalDate date;
-
+    /*
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_ORDER_ID")
     private Order order;
+
+     */
+
+    @OneToMany(targetEntity = Order.class,
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Order> ordersList = new ArrayList<>();
 
 
     public User(String name, String surname, String phone, String email) {
@@ -47,6 +54,5 @@ public class User {
         this.surname = surname;
         this.phone = phone;
         this.email = email;
-        this.date = LocalDate.now();
     }
 }

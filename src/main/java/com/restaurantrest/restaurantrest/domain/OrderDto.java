@@ -14,5 +14,6 @@ public class OrderDto {
     private Long orderId;
     private LocalDate orderDate;
     private double totalPrice;
+    private Long userId;
     private Long cartId;
 }

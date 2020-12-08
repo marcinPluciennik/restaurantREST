@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -15,6 +15,6 @@ public class UserDto {
     private String surname;
     private String phone;
     private String email;
-    private LocalDate date;
-    private Long orderId;
+    private List<Long> ordersIds;
+    //private Long orderId;
 }

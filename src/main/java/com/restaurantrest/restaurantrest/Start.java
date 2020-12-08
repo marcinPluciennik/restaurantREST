@@ -54,22 +54,24 @@ public class Start {
         menuDao.save(menu1);
         menuDao.save(menu2);
 
+        User user1 = new User("Adam", "Kowalski", "123123123", "bla@gmail.com");
+
+        User user2 = new User("Wojtek", "Tarnowski", "345345345", "wt@gmail.com");
+
+        userDao.save(user1);
+        userDao.save(user2);
+
 
         Order order1 = new Order(10.40);
         order1.setCart(cart1);
+        order1.setUser(user1);
         Order order2 = new Order(200.90);
         order2.setCart(cart2);
+        order2.setUser(user2);
 
         orderDao.save(order1);
         orderDao.save(order2);
 
-        User user1 = new User("Adam", "Kowalski", "123123123", "bla@gmail.com");
-        user1.setOrder(order1);
-        User user2 = new User("Wojtek", "Tarnowski", "345345345", "wt@gmail.com");
-        user2.setOrder(order2);
-
-        userDao.save(user1);
-        userDao.save(user2);
 
 
     }

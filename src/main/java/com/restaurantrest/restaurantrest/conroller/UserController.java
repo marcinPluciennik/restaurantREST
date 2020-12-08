@@ -23,7 +23,7 @@ public class UserController {
     private DbService service;
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
-    public UserDto createUser(@RequestBody UserDto userDto) throws OrderNotFoundException{
+    public UserDto createUser(@RequestBody UserDto userDto){
         return userMapper.mapToUserDto(service.saveUser(userMapper.mapToUser(userDto)));
     }
 
@@ -33,13 +33,13 @@ public class UserController {
         return userMapper.mapToUserDtoList(users);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUser/id")
-    public UserDto getUserById(@RequestParam Long userId) throws UserNotFoundException{
+    @RequestMapping(method = RequestMethod.GET, value = "getUser/{userId}")
+    public UserDto getUserById(@PathVariable Long userId) throws UserNotFoundException{
         return userMapper.mapToUserDto(service.findUserById(userId).orElseThrow(UserNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "removeUser/id")
-    public void removeUserById(@RequestParam Long userId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "removeUser/{userId}")
+    public void removeUserById(@PathVariable Long userId) {
         Optional<User> userById = service.getUsers().stream()
                 .filter(user -> user.getUserId() == userId)
                 .findFirst();
@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "editUser")
-    public void editUserById(@RequestBody UserDto userDto) throws OrderNotFoundException {
+    public void editUserById(@RequestBody UserDto userDto){
         Optional<User> userById = service.getUsers().stream()
                 .filter(user -> user.getUserId() == userDto.getUserId())
                 .findFirst();
