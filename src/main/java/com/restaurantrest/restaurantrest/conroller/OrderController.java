@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -46,7 +47,7 @@ public class OrderController {
         return orderMapper.mapToOrderDto(service.findOrderbyId(orderId).orElseThrow(OrderNotFoundException::new));
     }
 
-/*
+
     @RequestMapping(method = RequestMethod.DELETE, value = "removeOrder/{orderId}")
     public void removeOrderById(@PathVariable Long orderId) {
         Optional<Order> orderById = service.getOrders().stream()
@@ -56,8 +57,5 @@ public class OrderController {
             service.removeOrderById(orderId);
         }
     }
-
-
- */
 
 }
