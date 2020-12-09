@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,9 +30,8 @@ public class Dish {
     @Column(name= "PRICE")
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_CART_ID")
-    private Cart cart;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "dishList")
+    private List<Cart> cartList = new ArrayList<>();
 
 
     public Dish(String name, BigDecimal price) {

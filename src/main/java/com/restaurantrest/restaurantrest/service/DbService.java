@@ -34,10 +34,6 @@ public class DbService {
         return cartDao.save(cart);
     }
 
-    public Optional<List<Dish>> getDishesByCartId(Long cartId){
-        return dishDao.findDishesByCart_CartId(cartId);
-    }
-
     public Optional<Cart> findCartById(Long cartId){
         return cartDao.findById(cartId);
     }
@@ -82,4 +78,23 @@ public class DbService {
         orderDao.deleteById(id);
     }
 
+    public List<Cart> getCarts(){
+        return cartDao.findAll();
+    }
+
+    public void removeCartById(Long id){
+        cartDao.deleteById(id);
+    }
+
+    public List<Dish> getDishes(){
+        return dishDao.findAll();
+    }
+
+    public void removeDishById(Long id){
+        dishDao.deleteById(id);
+    }
+
+    public Dish saveDish(Dish dish) {
+        return dishDao.save(dish);
+    }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -23,9 +24,21 @@ public class Cart {
     @Column(name = "CART_ID")
     private Long cartId;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "JOIN_DISH_CART",
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "DISH_ID", referencedColumnName = "DISH_ID")}
+    )
+    private List<Dish> dishList = new ArrayList<>();
+
+
+    /*
     @OneToMany(targetEntity = Dish.class,
             mappedBy = "cart",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private List<Dish> dishList = new ArrayList<>();
+
+     */
 }

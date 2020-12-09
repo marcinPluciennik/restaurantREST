@@ -24,8 +24,7 @@ public class UserMapper {
                 userDto.getSurname(),
                 userDto.getPhone(),
                 userDto.getEmail(),
-                mapToOrders(userDto.getOrdersIds())
-        );
+                mapToOrdersList(userDto.getOrdersIds()));
     }
 
     public UserDto mapToUserDto(final User user){
@@ -35,18 +34,17 @@ public class UserMapper {
                 user.getSurname(),
                 user.getPhone(),
                 user.getEmail(),
-                mapToOrdersIds(user.getOrdersList())
-        );
+                mapToOrdersIdsList(user.getOrdersList()));
     }
 
     public List<UserDto> mapToUserDtoList(final List<User> userList){
         return userList.stream()
                 .map(u -> new UserDto(u.getUserId(), u.getName(), u.getSurname(), u.getPhone(), u.getEmail(),
-                        mapToOrdersIds(u.getOrdersList())))
+                        mapToOrdersIdsList(u.getOrdersList())))
                 .collect(Collectors.toList());
     }
 
-    public List<Order> mapToOrders(final List<Long> ordersIds) {
+    public List<Order> mapToOrdersList(final List<Long> ordersIds) {
         return ordersIds.stream()
                 .map(orderId -> orderDao.findById(orderId))
                 .filter(Optional::isPresent)
@@ -54,7 +52,7 @@ public class UserMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<Long> mapToOrdersIds(final List<Order> orderList) {
+    public List<Long> mapToOrdersIdsList(final List<Order> orderList) {
         return orderList.stream()
                 .map(Order::getOrderId)
                 .collect(Collectors.toList());

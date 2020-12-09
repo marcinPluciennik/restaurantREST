@@ -1,9 +1,7 @@
 package com.restaurantrest.restaurantrest.mapper;
 
 import com.restaurantrest.restaurantrest.dao.DishDao;
-import com.restaurantrest.restaurantrest.domain.Cart;
-import com.restaurantrest.restaurantrest.domain.CartDto;
-import com.restaurantrest.restaurantrest.domain.Dish;
+import com.restaurantrest.restaurantrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,26 +18,30 @@ public class CartMapper {
     public Cart mapToCart(final CartDto cartDto){
         return new Cart(
                 cartDto.getCartId(),
-                mapToDishes(cartDto.getDishesIds())
-        );
+                mapToDishesList(cartDto.getDishesIds()));
     }
 
     public CartDto mapToCartDto(final Cart cart){
         return new CartDto(
                 cart.getCartId(),
-                mapToDishesIds(cart.getDishList())
-        );
+                mapToDishesIdsList(cart.getDishList()));
     }
 
-    public List<Dish> mapToDishes(final List<Long> dishessIds) {
-        return dishessIds.stream()
+    public List<CartDto> mapToCartDtoList(final List<Cart> cartList){
+        return cartList.stream()
+                .map(c -> new CartDto(c.getCartId(), mapToDishesIdsList(c.getDishList())))
+                .collect(Collectors.toList());
+    }
+
+    public List<Dish> mapToDishesList(final List<Long> dishesIds) {
+        return dishesIds.stream()
                 .map(dishId -> dishDao.findById(dishId))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
     }
 
-    public List<Long> mapToDishesIds(final List<Dish> dishes) {
+    public List<Long> mapToDishesIdsList(final List<Dish> dishes) {
         return dishes.stream()
                 .map(Dish::getDishId)
                 .collect(Collectors.toList());

@@ -29,19 +29,26 @@ public class Start {
         Cart cart1 = new Cart();
         Cart cart2 = new Cart();
 
-        cartDao.save(cart1);
-        cartDao.save(cart2);
 
         Dish dish1 = new Dish("Schabowy", new BigDecimal("14.5"));
-        dish1.setCart(cart2);
         Dish dish2 = new Dish("Ziemniaki", new BigDecimal("4.5"));
-        dish2.setCart(cart2);
         Dish dish3 = new Dish("Surówka", new BigDecimal("4.5"));
-        dish3.setCart(cart1);
+        Dish dish4 = new Dish("Deser", new BigDecimal("5.5"));
+
+        dish1.getCartList().add(cart1);
+        dish2.getCartList().add(cart2);
+        cart1.getDishList().add(dish1);
+        cart2.getDishList().add(dish2);
+
+
+        cartDao.save(cart1);
+        cartDao.save(cart2);
 
         dishDao.save(dish1);
         dishDao.save(dish2);
         dishDao.save(dish3);
+        dishDao.save(dish4);
+
 
         Menu menu1 = new Menu("Salatki",
                 LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));

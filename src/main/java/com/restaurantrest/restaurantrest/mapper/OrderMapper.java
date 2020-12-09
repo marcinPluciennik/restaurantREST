@@ -27,8 +27,7 @@ public class OrderMapper {
                 orderDto.getOrderDate(),
                 orderDto.getTotalPrice(),
                 userDao.findById(orderDto.getUserId()).orElseThrow(UserNotFoundException::new),
-                cartDao.findById(orderDto.getCartId()).orElseThrow(CartNotFoundException::new)
-        );
+                cartDao.findById(orderDto.getCartId()).orElseThrow(CartNotFoundException::new));
     }
 
     public OrderDto mapToOrderDto(final Order order){
@@ -37,8 +36,7 @@ public class OrderMapper {
                 order.getOrderDate(),
                 order.getTotalPrice(),
                 order.getUser().getUserId(),
-                order.getOrderId()
-        );
+                order.getOrderId());
     }
 
     public List<OrderDto> mapToOrderDtoList(List<Order> orderList){
@@ -48,9 +46,4 @@ public class OrderMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<Long> mapToOrdersIds(final List<Order> orders) {
-        return orders.stream()
-                .map(Order::getOrderId)
-                .collect(Collectors.toList());
-    }
 }

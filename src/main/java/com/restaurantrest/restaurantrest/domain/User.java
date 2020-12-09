@@ -35,12 +35,6 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    /*
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_ORDER_ID")
-    private Order order;
-
-     */
 
     @OneToMany(targetEntity = Order.class,
             mappedBy = "user",
