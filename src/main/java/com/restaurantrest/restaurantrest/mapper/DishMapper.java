@@ -1,7 +1,9 @@
 package com.restaurantrest.restaurantrest.mapper;
 
 import com.restaurantrest.restaurantrest.conroller.CartNotFoundException;
+import com.restaurantrest.restaurantrest.conroller.MenuNotFoundException;
 import com.restaurantrest.restaurantrest.dao.CartDao;
+import com.restaurantrest.restaurantrest.dao.MenuDao;
 import com.restaurantrest.restaurantrest.domain.Cart;
 import com.restaurantrest.restaurantrest.domain.Dish;
 import com.restaurantrest.restaurantrest.domain.DishDto;
@@ -18,12 +20,16 @@ public class DishMapper {
     @Autowired
     private CartDao cartDao;
 
-    public Dish mapToDish(final DishDto dishDto) throws CartNotFoundException {
+    @Autowired
+    private MenuDao menuDao;
+
+    public Dish mapToDish(final DishDto dishDto) throws CartNotFoundException, MenuNotFoundException {
         return new Dish(
                 dishDto.getDishId(),
                 dishDto.getName(),
                 dishDto.getPrice(),
-                mapToCartList(dishDto.getCartsIds()));
+                mapToCartList(dishDto.getCartsIds()),
+                menuDao.findById(dishDto.getMenuId()).orElseThrow(MenuNotFoundException::new));
     }
 
     public DishDto mapToDishDto(final Dish dish){
@@ -31,12 +37,14 @@ public class DishMapper {
                 dish.getDishId(),
                 dish.getName(),
                 dish.getPrice(),
-                mapToCartsIdsList(dish.getCartList()));
+                mapToCartsIdsList(dish.getCartList()),
+                dish.getMenu().getMenuId());
     }
 
     public List<DishDto> mapToDishDtoList(final List<Dish> dishList) {
         return dishList.stream()
-                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(), mapToCartsIdsList(d.getCartList())))
+                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(), mapToCartsIdsList(d.getCartList()),
+                        d.getMenu().getMenuId()))
                 .collect(Collectors.toList());
     }
 

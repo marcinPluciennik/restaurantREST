@@ -33,6 +33,9 @@ public class Dish {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "dishList")
     private List<Cart> cartList = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "FK_MENU_ID")
+    private Menu menu;
 
     public Dish(String name, BigDecimal price) {
         this.name = name;

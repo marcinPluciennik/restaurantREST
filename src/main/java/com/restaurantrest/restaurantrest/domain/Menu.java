@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,9 +30,18 @@ public class Menu {
     @Column(name = "DAILY_DATE")
     private LocalDateTime startDate;
 
+    @OneToMany(targetEntity = Dish.class,
+            mappedBy = "menu",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    private List<Dish> dishesList = new ArrayList<>();
+
+    /*
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "FK_DISH_ID")
     private Dish dish;
+
+     */
 
     public Menu(String menuName, LocalDateTime startDate) {
         this.menuName = menuName;

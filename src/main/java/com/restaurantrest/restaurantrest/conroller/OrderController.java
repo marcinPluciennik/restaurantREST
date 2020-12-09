@@ -1,5 +1,7 @@
 package com.restaurantrest.restaurantrest.conroller;
 
+import com.restaurantrest.restaurantrest.domain.Dish;
+import com.restaurantrest.restaurantrest.domain.DishDto;
 import com.restaurantrest.restaurantrest.domain.Order;
 import com.restaurantrest.restaurantrest.domain.OrderDto;
 import com.restaurantrest.restaurantrest.mapper.OrderMapper;
@@ -44,7 +46,7 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrder/{orderId}")
     public OrderDto getOrderById(@PathVariable Long orderId) throws OrderNotFoundException{
-        return orderMapper.mapToOrderDto(service.findOrderbyId(orderId).orElseThrow(OrderNotFoundException::new));
+        return orderMapper.mapToOrderDto(service.findOrderById(orderId).orElseThrow(OrderNotFoundException::new));
     }
 
 
@@ -55,6 +57,17 @@ public class OrderController {
                 .findFirst();
         if (orderById.isPresent()) {
             service.removeOrderById(orderId);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "editOrder")
+    public void editOrderById(@RequestBody OrderDto orderDto) throws UserNotFoundException{
+        Optional<Order> orderById = service.getOrders().stream()
+                .filter(order -> order.getOrderId() == orderDto.getOrderId())
+                .findFirst();
+        if (orderById.isPresent()) {
+            service.removeOrderById(orderDto.getOrderId());
+            service.saveOrder(orderMapper.mapToOrder(orderDto));
         }
     }
 

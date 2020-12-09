@@ -32,13 +32,23 @@ public class Start {
 
         Dish dish1 = new Dish("Schabowy", new BigDecimal("14.5"));
         Dish dish2 = new Dish("Ziemniaki", new BigDecimal("4.5"));
-        Dish dish3 = new Dish("Surówka", new BigDecimal("4.5"));
-        Dish dish4 = new Dish("Deser", new BigDecimal("5.5"));
+
+
+        Menu menu1 = new Menu("Salatki",
+                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
+        Menu menu2 = new Menu("Desery",
+                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
+
+        menuDao.save(menu1);
+        menuDao.save(menu2);
 
         dish1.getCartList().add(cart1);
         dish2.getCartList().add(cart2);
         cart1.getDishList().add(dish1);
         cart2.getDishList().add(dish2);
+
+        dish1.setMenu(menu1);
+        dish2.setMenu(menu1);
 
 
         cartDao.save(cart1);
@@ -46,23 +56,9 @@ public class Start {
 
         dishDao.save(dish1);
         dishDao.save(dish2);
-        dishDao.save(dish3);
-        dishDao.save(dish4);
 
-
-        Menu menu1 = new Menu("Salatki",
-                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
-        menu1.setDish(dish1);
-        Menu menu2 = new Menu("Desery",
-                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
-        menu2.setDish(dish2);
-
-
-        menuDao.save(menu1);
-        menuDao.save(menu2);
 
         User user1 = new User("Adam", "Kowalski", "123123123", "bla@gmail.com");
-
         User user2 = new User("Wojtek", "Tarnowski", "345345345", "wt@gmail.com");
 
         userDao.save(user1);
@@ -78,8 +74,6 @@ public class Start {
 
         orderDao.save(order1);
         orderDao.save(order2);
-
-
 
     }
 }

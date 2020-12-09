@@ -1,13 +1,7 @@
 package com.restaurantrest.restaurantrest.service;
 
-import com.restaurantrest.restaurantrest.dao.CartDao;
-import com.restaurantrest.restaurantrest.dao.DishDao;
-import com.restaurantrest.restaurantrest.dao.OrderDao;
-import com.restaurantrest.restaurantrest.dao.UserDao;
-import com.restaurantrest.restaurantrest.domain.Cart;
-import com.restaurantrest.restaurantrest.domain.Dish;
-import com.restaurantrest.restaurantrest.domain.Order;
-import com.restaurantrest.restaurantrest.domain.User;
+import com.restaurantrest.restaurantrest.dao.*;
+import com.restaurantrest.restaurantrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +23,9 @@ public class DbService {
 
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private MenuDao menuDao;
 
     public Cart saveCart(Cart cart) {
         return cartDao.save(cart);
@@ -70,7 +67,7 @@ public class DbService {
         return orderDao.findOrdersByOrderDate(date);
     }
 
-    public Optional<Order> findOrderbyId(Long id){
+    public Optional<Order> findOrderById(Long id){
         return orderDao.findById(id);
     }
 
@@ -96,5 +93,21 @@ public class DbService {
 
     public Dish saveDish(Dish dish) {
         return dishDao.save(dish);
+    }
+
+    public Menu saveMenu(Menu menu){
+        return menuDao.save(menu);
+    }
+
+    public List<Menu> getMenus(){
+        return menuDao.findAll();
+    }
+
+    public Optional<Menu> findMenuById(Long id){
+        return menuDao.findById(id);
+    }
+
+    public void removeMenuById(Long id){
+        menuDao.deleteById(id);
     }
 }
