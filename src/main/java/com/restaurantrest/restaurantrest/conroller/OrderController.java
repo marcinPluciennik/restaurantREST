@@ -1,7 +1,5 @@
 package com.restaurantrest.restaurantrest.conroller;
 
-import com.restaurantrest.restaurantrest.domain.Dish;
-import com.restaurantrest.restaurantrest.domain.DishDto;
 import com.restaurantrest.restaurantrest.domain.Order;
 import com.restaurantrest.restaurantrest.domain.OrderDto;
 import com.restaurantrest.restaurantrest.mapper.OrderMapper;
