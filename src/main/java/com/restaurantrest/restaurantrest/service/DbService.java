@@ -30,6 +30,9 @@ public class DbService {
     @Autowired
     private ReviewDao reviewDao;
 
+    @Autowired
+    private TempDao tempDao;
+
     public Cart saveCart(Cart cart) {
         return cartDao.save(cart);
     }
@@ -130,4 +133,19 @@ public class DbService {
         reviewDao.deleteById(id);
     }
 
+    public Temp saveTemp(Temp temp){
+        return tempDao.save(temp);
+    }
+
+    public List<Temp> getTemps(){
+        return tempDao.findAll();
+    }
+
+    public Optional<Temp> findTempById(Long id){
+        return tempDao.findById(id);
+    }
+
+    public void removeTempById(Long id){
+        tempDao.deleteById(id);
+    }
 }
