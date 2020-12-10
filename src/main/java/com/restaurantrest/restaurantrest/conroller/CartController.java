@@ -7,6 +7,7 @@ import com.restaurantrest.restaurantrest.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -73,5 +74,29 @@ public class CartController {
         Cart cart = service.findCartById(cartId).orElseThrow(CartNotFoundException::new);
         cart.getDishList().add(dish);
         return cartMapper.mapToCartDto(service.saveCart(cart));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "removeDish/{cartId}/{dishId}")
+    public void removeDishFromCartById(@PathVariable Long cartId, @PathVariable Long dishId) {
+        Cart cart = service.findCartById(cartId).orElseThrow(CartNotFoundException::new);
+        cart.getDishList().removeIf(dish -> dish.getDishId() == dishId);
+        cartMapper.mapToCartDto(service.saveCart(cart));
+    }
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "getTotalPrice/{cartId}")
+    public BigDecimal getTotalPriceFromCart(@PathVariable Long cartId){
+        Optional<Cart> cartById = service.getCarts().stream()
+                .filter(user -> user.getCartId() == cartId)
+                .findFirst();
+        if (cartById.isPresent()) {
+            Cart cart = cartById.get();
+
+            BigDecimal totalPrice = cart.getDishList().stream()
+                    .map(dish -> dish.getPrice())
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+            return totalPrice;
+        }
+        return new BigDecimal("0");
     }
 }

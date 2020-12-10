@@ -27,6 +27,9 @@ public class DbService {
     @Autowired
     private MenuDao menuDao;
 
+    @Autowired
+    private ReviewDao reviewDao;
+
     public Cart saveCart(Cart cart) {
         return cartDao.save(cart);
     }
@@ -110,4 +113,21 @@ public class DbService {
     public void removeMenuById(Long id){
         menuDao.deleteById(id);
     }
+
+    public Review saveReview(Review review){
+        return reviewDao.save(review);
+    }
+
+    public List<Review> getReviews(){
+        return reviewDao.findAll();
+    }
+
+    public Optional<Review> findReviewById(Long id){
+        return reviewDao.findById(id);
+    }
+
+    public void removeReviewById(Long id){
+        reviewDao.deleteById(id);
+    }
+
 }
