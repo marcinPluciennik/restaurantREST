@@ -37,7 +37,7 @@ public class OrderMapperTestSuite {
         User user = new User(1L,"Jan", "Nowak", "111111111", "jnowak@gmail.com",ordersList);
 
         Order order = new Order(1L, LocalDate.of(2020,12,11),
-                100, user, cart);
+                new BigDecimal(100), user, cart);
 
         //When
         OrderDto orderDto = orderMapper.mapToOrderDto(order);
@@ -45,7 +45,6 @@ public class OrderMapperTestSuite {
         //Then
         long id  = orderDto.getOrderId();
         Assert.assertEquals(1L, id);
-        Assert.assertEquals(100, orderDto.getTotalPrice(),0);
+        Assert.assertEquals(new BigDecimal(100), orderDto.getTotalPrice());
     }
-
 }

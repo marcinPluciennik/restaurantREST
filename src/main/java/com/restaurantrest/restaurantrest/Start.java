@@ -65,10 +65,10 @@ public class Start {
         userDao.save(user2);
 
 
-        Order order1 = new Order(10.40);
+        Order order1 = new Order(new BigDecimal(10.40));
         order1.setCart(cart1);
         order1.setUser(user1);
-        Order order2 = new Order(200.90);
+        Order order2 = new Order(new BigDecimal(200.90));
         order2.setCart(cart2);
         order2.setUser(user2);
 

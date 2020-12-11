@@ -45,5 +45,4 @@ public class OrderMapper {
                         o.getUser().getUserId(), o.getCart().getCartId()))
                 .collect(Collectors.toList());
     }
-
 }

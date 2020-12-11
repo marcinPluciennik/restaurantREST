@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class Order {
     private LocalDate orderDate;
 
     @Column(name = "TOTAL_PRICE")
-    private double totalPrice;
+    private BigDecimal totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "FK_USER_ID")
@@ -36,7 +37,7 @@ public class Order {
     @JoinColumn(name = "FK_CART_ID")
     private Cart cart;
 
-    public Order(double totalPrice) {
+    public Order(BigDecimal totalPrice) {
         this.orderDate = LocalDate.now();
         this.totalPrice = totalPrice;
     }
