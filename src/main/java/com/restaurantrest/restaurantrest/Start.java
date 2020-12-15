@@ -1,5 +1,6 @@
 package com.restaurantrest.restaurantrest;
 
+import com.restaurantrest.restaurantrest.conroller.MyReviewController;
 import com.restaurantrest.restaurantrest.conroller.TempController;
 import com.restaurantrest.restaurantrest.dao.*;
 import com.restaurantrest.restaurantrest.domain.*;
@@ -16,13 +17,10 @@ public class Start {
 
     @Autowired
     public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, DishDao dishDao, MenuDao menuDao,
-                 ReviewDao reviewDao, TempController tempController) {
+                 TempController tempController, MyReviewController myReviewController) {
 
-        Review review1 = new Review("OK!!!!", 5);
-        Review review2 = new Review("SUPER", 4.5);
-        reviewDao.save(review1);
-        reviewDao.save(review2);
 
+        myReviewController.saveExistingReviews();
 
         tempController.saveTemp();
 

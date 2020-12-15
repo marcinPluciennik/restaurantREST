@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity(name = "REVIEWS")
-public class Review {
+public class MyReview {
 
     @Id
     @NotNull
@@ -25,10 +25,19 @@ public class Review {
     private String reviewText;
 
     @Column(name = "RATING")
-    private double rating;
+    private int rating;
 
-    public Review(String reviewText, double rating) {
+    public MyReview(String reviewText, int rating) {
         this.reviewText = reviewText;
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return "MyReview{" +
+                "reviewId=" + reviewId +
+                ", reviewText='" + reviewText + '\'' +
+                ", rating=" + rating +
+                '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.restaurantrest.restaurantrest.mapper;
 
-import com.restaurantrest.restaurantrest.domain.Review;
-import com.restaurantrest.restaurantrest.domain.ReviewDto;
+import com.restaurantrest.restaurantrest.domain.MyReview;
+import com.restaurantrest.restaurantrest.domain.MyReviewDto;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,23 +13,23 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-public class ReviewMapperTestSuite {
+public class MyReviewMapperTestSuite {
 
     @Autowired
-    private ReviewMapper reviewMapper;
+    private MyReviewMapper myReviewMapper;
 
     @Test
     public void testMapToReviewDto(){
         //Given
-        Review review = new Review(1L,"OK", 5);
+        MyReview myReview = new MyReview(1L,"OK", 5);
 
         //When
-        ReviewDto reviewDto = reviewMapper.mapToReviewDto(review);
+        MyReviewDto myReviewDto = myReviewMapper.mapToReviewDto(myReview);
 
         //Then
-        long id  = reviewDto.getReviewId();
+        long id  = myReviewDto.getReviewId();
         Assert.assertEquals(1L, id);
-        Assert.assertEquals("OK", reviewDto.getReviewText());
-        Assert.assertEquals(5, reviewDto.getRating(),0);
+        Assert.assertEquals("OK", myReviewDto.getReviewText());
+        Assert.assertEquals(5, myReviewDto.getRating(),0);
     }
 }

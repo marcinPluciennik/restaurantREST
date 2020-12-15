@@ -28,7 +28,7 @@ public class DbService {
     private MenuDao menuDao;
 
     @Autowired
-    private ReviewDao reviewDao;
+    private MyReviewDao myReviewDao;
 
     @Autowired
     private TempDao tempDao;
@@ -117,22 +117,6 @@ public class DbService {
         menuDao.deleteById(id);
     }
 
-    public Review saveReview(Review review) {
-        return reviewDao.save(review);
-    }
-
-    public List<Review> getReviews() {
-        return reviewDao.findAll();
-    }
-
-    public Optional<Review> findReviewById(Long id) {
-        return reviewDao.findById(id);
-    }
-
-    public void removeReviewById(Long id) {
-        reviewDao.deleteById(id);
-    }
-
     public void saveTemp(Long id, LocalDate date, Double temp) {
         tempDao.saveTemp(id, date, temp);
     }
@@ -151,5 +135,27 @@ public class DbService {
 
     public void updateTemp(Temp temp) {
         tempDao.updateTemp(temp);
+    }
+
+    public void saveExistingReviews(List<MyReview> reviews) {myReviewDao.saveExistingReviews(reviews); }
+
+    public List<MyReview> getReviews() {
+        return myReviewDao.findAll();
+    }
+
+    public MyReview findMyReviewById(Long id) {
+        return myReviewDao.findMyReviewById(id);
+    }
+
+    public boolean removeMyReviewById(Long id) {
+        return myReviewDao.deleteMyReviewById(id);
+    }
+
+    public void updateMyReview(MyReview newMyReview) {
+        myReviewDao.updateMyReview(newMyReview);
+    }
+
+    public void addOneMyReview(String reviewText, Integer rating){
+        myReviewDao.save(reviewText, rating);
     }
 }

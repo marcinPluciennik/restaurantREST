@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ReviewDto {
+public class MyReviewDto {
 
     private Long reviewId;
     private String reviewText;
-    private double rating;
+    private int rating;
 }

@@ -15,8 +15,12 @@ public class WeatherClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeatherClient.class);
 
-    @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    public WeatherClient() {
+        this.restTemplate = new RestTemplate();
+    }
 
     public PragueWeather getWeatherInPrague(){
         try{
