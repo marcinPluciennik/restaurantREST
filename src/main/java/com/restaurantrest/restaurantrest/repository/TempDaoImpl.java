@@ -1,6 +1,6 @@
 package com.restaurantrest.restaurantrest.repository;
 
-import com.restaurantrest.restaurantrest.dao.TempPragueDao;
+import com.restaurantrest.restaurantrest.dao.TempDao;
 import com.restaurantrest.restaurantrest.domain.Temp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 
 @Repository
-public class TempDaoImpl implements TempPragueDao {
+public class TempDaoImpl implements TempDao {
 
     private JdbcTemplate jdbcTemplate;
     private static final Logger LOGGER = LoggerFactory.getLogger(TempDaoImpl.class);

@@ -1,8 +1,7 @@
 package com.restaurantrest.restaurantrest.conroller;
 
 import com.restaurantrest.restaurantrest.client.WeatherClient;
-import com.restaurantrest.restaurantrest.dao.TempPragueDao;
-import com.restaurantrest.restaurantrest.domain.Temp;
+import com.restaurantrest.restaurantrest.dao.TempDao;
 import com.restaurantrest.restaurantrest.domain.TempDto;
 import com.restaurantrest.restaurantrest.mapper.TempMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -26,7 +24,7 @@ public class TempController {
     private DbService service;
 
     @Autowired
-    private TempPragueDao tempPragueDao;
+    private TempDao tempDao;
 
     @Autowired
     private WeatherClient weatherClient;
@@ -50,7 +48,7 @@ public class TempController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "editTemp")
     public void editTempById(@RequestBody TempDto tempDto){
-        tempPragueDao.updateTemp(tempMapper.mapToTemp(tempDto));
+        tempDao.updateTemp(tempMapper.mapToTemp(tempDto));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTemp/{date}")

@@ -31,7 +31,7 @@ public class DbService {
     private ReviewDao reviewDao;
 
     @Autowired
-    private TempPragueDao tempPragueDao;
+    private TempDao tempDao;
 
     public Cart saveCart(Cart cart) {
         return cartDao.save(cart);
@@ -134,18 +134,18 @@ public class DbService {
     }
 
     public void saveTemp(Long id, LocalDate date, Double temp) {
-        tempPragueDao.saveTemp(id, date, temp);
+        tempDao.saveTemp(id, date, temp);
     }
 
     public List<Temp> getTemps() {
-        return tempPragueDao.findAll();
+        return tempDao.findAll();
     }
 
     public Temp findTempByDate(LocalDate date) {
-        return tempPragueDao.findTempByDate(date);
+        return tempDao.findTempByDate(date);
     }
 
     public boolean removeTempById(Long id) {
-        return tempPragueDao.deleteTemp(id);
+        return tempDao.deleteTemp(id);
     }
 }
