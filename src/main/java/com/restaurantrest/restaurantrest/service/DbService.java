@@ -148,4 +148,8 @@ public class DbService {
     public boolean removeTempById(Long id) {
         return tempDao.deleteTemp(id);
     }
+
+    public void updateTemp(Temp temp) {
+        tempDao.updateTemp(temp);
+    }
 }

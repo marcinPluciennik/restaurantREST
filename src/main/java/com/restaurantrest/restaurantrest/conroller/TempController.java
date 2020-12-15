@@ -24,9 +24,6 @@ public class TempController {
     private DbService service;
 
     @Autowired
-    private TempDao tempDao;
-
-    @Autowired
     private WeatherClient weatherClient;
 
     @RequestMapping(method = RequestMethod.POST, value = "saveTemp", consumes = APPLICATION_JSON_VALUE)
@@ -48,7 +45,7 @@ public class TempController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "editTemp")
     public void editTempById(@RequestBody TempDto tempDto){
-        tempDao.updateTemp(tempMapper.mapToTemp(tempDto));
+        service.updateTemp(tempMapper.mapToTemp(tempDto));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTemp/{date}")
