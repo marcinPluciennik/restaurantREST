@@ -1,6 +1,7 @@
-package com.restaurantrest.restaurantrest.model;
+package com.restaurantrest.restaurantrest.model.menu;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -11,23 +12,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "dish"
+    "daily_menus",
+    "status"
 })
-public class Dishh {
+public class Menu {
 
-    @JsonProperty("dish")
-    private Dish_ dish;
+    @JsonProperty("daily_menus")
+    private List<DailyMenu> dailyMenus = null;
+    @JsonProperty("status")
+    private String status;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("dish")
-    public Dish_ getDish() {
-        return dish;
+    @JsonProperty("daily_menus")
+    public List<DailyMenu> getDailyMenus() {
+        return dailyMenus;
     }
 
-    @JsonProperty("dish")
-    public void setDish(Dish_ dish) {
-        this.dish = dish;
+    @JsonProperty("daily_menus")
+    public void setDailyMenus(List<DailyMenu> dailyMenus) {
+        this.dailyMenus = dailyMenus;
+    }
+
+    @JsonProperty("status")
+    public String getStatus() {
+        return status;
+    }
+
+    @JsonProperty("status")
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @JsonAnyGetter

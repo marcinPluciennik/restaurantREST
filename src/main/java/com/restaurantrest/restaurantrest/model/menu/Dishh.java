@@ -1,4 +1,4 @@
-package com.restaurantrest.restaurantrest.model;
+package com.restaurantrest.restaurantrest.model.menu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,49 +11,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "dish_id",
-    "name",
-    "price"
+    "dish"
 })
-public class Dish_ {
+public class Dishh {
 
-    @JsonProperty("dish_id")
-    private String dishId;
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("price")
-    private String price;
+    @JsonProperty("dish")
+    private Dish_ dish;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("dish_id")
-    public String getDishId() {
-        return dishId;
+    @JsonProperty("dish")
+    public Dish_ getDish() {
+        return dish;
     }
 
-    @JsonProperty("dish_id")
-    public void setDishId(String dishId) {
-        this.dishId = dishId;
-    }
-
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("price")
-    public String getPrice() {
-        return price;
-    }
-
-    @JsonProperty("price")
-    public void setPrice(String price) {
-        this.price = price;
+    @JsonProperty("dish")
+    public void setDish(Dish_ dish) {
+        this.dish = dish;
     }
 
     @JsonAnyGetter

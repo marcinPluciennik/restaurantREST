@@ -31,69 +31,69 @@ public class DbService {
     private ReviewDao reviewDao;
 
     @Autowired
-    private TempDao tempDao;
+    private TempPragueDao tempPragueDao;
 
     public Cart saveCart(Cart cart) {
         return cartDao.save(cart);
     }
 
-    public Optional<Cart> findCartById(Long cartId){
+    public Optional<Cart> findCartById(Long cartId) {
         return cartDao.findById(cartId);
     }
 
-    public Optional<User> findUserById(Long userId){
+    public Optional<User> findUserById(Long userId) {
         return userDao.findById(userId);
     }
 
-    public Optional<Dish> findDishById(Long dishId){
+    public Optional<Dish> findDishById(Long dishId) {
         return dishDao.findById(dishId);
     }
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         return userDao.save(user);
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userDao.findAll();
     }
 
-    public void removeUserById(Long id){
+    public void removeUserById(Long id) {
         userDao.deleteById(id);
     }
 
-    public Order saveOrder(Order order){
+    public Order saveOrder(Order order) {
         return orderDao.save(order);
     }
 
-    public List<Order> getOrders(){
+    public List<Order> getOrders() {
         return orderDao.findAll();
     }
 
-    public Optional<List<Order>> getOrdersByDate(LocalDate date){
+    public Optional<List<Order>> getOrdersByDate(LocalDate date) {
         return orderDao.findOrdersByOrderDate(date);
     }
 
-    public Optional<Order> findOrderById(Long id){
+    public Optional<Order> findOrderById(Long id) {
         return orderDao.findById(id);
     }
 
-    public void removeOrderById(Long id){
+    public void removeOrderById(Long id) {
         orderDao.deleteById(id);
     }
 
-    public List<Cart> getCarts(){
+    public List<Cart> getCarts() {
         return cartDao.findAll();
     }
 
-    public void removeCartById(Long id){
+    public void removeCartById(Long id) {
         cartDao.deleteById(id);
     }
 
-    public List<Dish> getDishes(){
+    public List<Dish> getDishes() {
         return dishDao.findAll();
     }
 
-    public void removeDishById(Long id){
+    public void removeDishById(Long id) {
         dishDao.deleteById(id);
     }
 
@@ -101,51 +101,51 @@ public class DbService {
         return dishDao.save(dish);
     }
 
-    public Menu saveMenu(Menu menu){
+    public Menu saveMenu(Menu menu) {
         return menuDao.save(menu);
     }
 
-    public List<Menu> getMenus(){
+    public List<Menu> getMenus() {
         return menuDao.findAll();
     }
 
-    public Optional<Menu> findMenuById(Long id){
+    public Optional<Menu> findMenuById(Long id) {
         return menuDao.findById(id);
     }
 
-    public void removeMenuById(Long id){
+    public void removeMenuById(Long id) {
         menuDao.deleteById(id);
     }
 
-    public Review saveReview(Review review){
+    public Review saveReview(Review review) {
         return reviewDao.save(review);
     }
 
-    public List<Review> getReviews(){
+    public List<Review> getReviews() {
         return reviewDao.findAll();
     }
 
-    public Optional<Review> findReviewById(Long id){
+    public Optional<Review> findReviewById(Long id) {
         return reviewDao.findById(id);
     }
 
-    public void removeReviewById(Long id){
+    public void removeReviewById(Long id) {
         reviewDao.deleteById(id);
     }
 
-    public Temp saveTemp(Temp temp){
-        return tempDao.save(temp);
+    public void saveTemp(Long id, LocalDate date, Double temp) {
+        tempPragueDao.saveTemp(id, date, temp);
     }
 
-    public List<Temp> getTemps(){
-        return tempDao.findAll();
+    public List<Temp> getTemps() {
+        return tempPragueDao.findAll();
     }
 
-    public Optional<Temp> findTempById(Long id){
-        return tempDao.findById(id);
+    public Temp findTempByDate(LocalDate date) {
+        return tempPragueDao.findTempByDate(date);
     }
 
-    public void removeTempById(Long id){
-        tempDao.deleteById(id);
+    public boolean removeTempById(Long id) {
+        return tempPragueDao.deleteTemp(id);
     }
 }

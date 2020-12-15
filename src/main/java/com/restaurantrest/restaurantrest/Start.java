@@ -1,5 +1,6 @@
 package com.restaurantrest.restaurantrest;
 
+import com.restaurantrest.restaurantrest.conroller.TempController;
 import com.restaurantrest.restaurantrest.dao.*;
 import com.restaurantrest.restaurantrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,15 @@ public class Start {
 
     @Autowired
     public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, DishDao dishDao, MenuDao menuDao,
-                 ReviewDao reviewDao, TempDao tempDao) {
+                 ReviewDao reviewDao, TempController tempController) {
 
         Review review1 = new Review("OK!!!!", 5);
         Review review2 = new Review("SUPER", 4.5);
         reviewDao.save(review1);
         reviewDao.save(review2);
 
-        Temp temp = new Temp(2);
-        tempDao.save(temp);
+
+        tempController.saveTemp();
 
 
         Cart cart1 = new Cart();

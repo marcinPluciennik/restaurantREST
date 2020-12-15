@@ -1,4 +1,4 @@
-package com.restaurantrest.restaurantrest.model;
+package com.restaurantrest.restaurantrest.model.menu;
 
 import java.util.HashMap;
 import java.util.List;

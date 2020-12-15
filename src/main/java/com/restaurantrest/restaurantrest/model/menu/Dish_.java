@@ -1,7 +1,6 @@
-package com.restaurantrest.restaurantrest.model;
+package com.restaurantrest.restaurantrest.model.menu;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -12,36 +11,49 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "daily_menus",
-    "status"
+    "dish_id",
+    "name",
+    "price"
 })
-public class Menu {
+public class Dish_ {
 
-    @JsonProperty("daily_menus")
-    private List<DailyMenu> dailyMenus = null;
-    @JsonProperty("status")
-    private String status;
+    @JsonProperty("dish_id")
+    private String dishId;
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("price")
+    private String price;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("daily_menus")
-    public List<DailyMenu> getDailyMenus() {
-        return dailyMenus;
+    @JsonProperty("dish_id")
+    public String getDishId() {
+        return dishId;
     }
 
-    @JsonProperty("daily_menus")
-    public void setDailyMenus(List<DailyMenu> dailyMenus) {
-        this.dailyMenus = dailyMenus;
+    @JsonProperty("dish_id")
+    public void setDishId(String dishId) {
+        this.dishId = dishId;
     }
 
-    @JsonProperty("status")
-    public String getStatus() {
-        return status;
+    @JsonProperty("name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("status")
-    public void setStatus(String status) {
-        this.status = status;
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("price")
+    public String getPrice() {
+        return price;
+    }
+
+    @JsonProperty("price")
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     @JsonAnyGetter

@@ -32,4 +32,8 @@ public class Temp {
         this.date = LocalDate.now();
         this.temp = temp;
     }
+    public Temp(LocalDate date, double temp) {
+        this.date = date;
+        this.temp = temp;
+    }
 }
