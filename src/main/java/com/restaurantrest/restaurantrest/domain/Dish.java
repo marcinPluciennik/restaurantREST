@@ -37,8 +37,25 @@ public class Dish {
     @JoinColumn(name = "FK_MENU_ID")
     private Menu menu;
 
+    public Dish(Long dishId, String name, BigDecimal price) {
+        this.dishId = dishId;
+        this.name = name;
+        this.price = price;
+    }
+
     public Dish(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "dishId=" + dishId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", cartList=" + cartList +
+                ", menu=" + menu +
+                '}';
     }
 }

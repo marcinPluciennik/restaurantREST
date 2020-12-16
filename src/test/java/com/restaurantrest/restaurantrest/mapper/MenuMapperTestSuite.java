@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class MenuMapperTestSuite {
         dishes.add(dish2);
         dishes.add(dish3);
         Menu menu = new Menu(1L,"Desserts",
-                LocalDateTime.of(2020, 12, 11, 12, 12,12), dishes);
+                LocalDate.of(2020, 12, 11), dishes);
 
         //When
         MenuDto menuDto = menuMapper.mapToMenuDto(menu);

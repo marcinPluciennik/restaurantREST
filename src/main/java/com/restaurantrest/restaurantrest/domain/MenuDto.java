@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,6 +15,6 @@ public class MenuDto {
 
     private Long menuId;
     private String menuName;
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     private List<Long> dishesIds;
 }

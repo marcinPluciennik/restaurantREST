@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -17,7 +18,7 @@ public class Start {
 
     @Autowired
     public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, DishDao dishDao, MenuDao menuDao,
-                 TempController tempController, MyReviewController myReviewController) {
+                 MyReviewDao myReviewDao, TempController tempController, MyReviewController myReviewController) {
 
 
         myReviewController.saveExistingReviews();
@@ -34,9 +35,9 @@ public class Start {
 
 
         Menu menu1 = new Menu("Salatki",
-                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
+                LocalDate.of(2020, Month.DECEMBER, 2));
         Menu menu2 = new Menu("Desery",
-                LocalDateTime.of(2020, Month.DECEMBER, 2, 20,10,11));
+                LocalDate.of(2020, Month.DECEMBER, 2));
 
         menuDao.save(menu1);
         menuDao.save(menu2);

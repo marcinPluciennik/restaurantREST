@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Menu {
     private String menuName;
 
     @Column(name = "DAILY_DATE")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @OneToMany(targetEntity = Dish.class,
             mappedBy = "menu",
@@ -36,15 +37,18 @@ public class Menu {
             fetch = FetchType.LAZY)
     private List<Dish> dishesList = new ArrayList<>();
 
-    /*
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FK_DISH_ID")
-    private Dish dish;
-
-     */
-
-    public Menu(String menuName, LocalDateTime startDate) {
+    public Menu(String menuName, LocalDate startDate) {
         this.menuName = menuName;
         this.startDate = startDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "menuId=" + menuId +
+                ", menuName='" + menuName + '\'' +
+                ", startDate=" + startDate +
+                ", dishesList=" + dishesList +
+                '}';
     }
 }

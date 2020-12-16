@@ -40,4 +40,18 @@ public class DailyMenu {
         this.additionalProperties.put(name, value);
     }
 
+    public DailyMenu(DailyMenu_ dailyMenu) {
+        this.dailyMenu = dailyMenu;
+    }
+
+    public DailyMenu() {
+    }
+
+    @Override
+    public String toString() {
+        return "DailyMenu{" +
+                "dailyMenu=" + dailyMenu +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

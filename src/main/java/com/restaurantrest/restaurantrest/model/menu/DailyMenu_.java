@@ -93,4 +93,26 @@ public class DailyMenu_ {
         this.additionalProperties.put(name, value);
     }
 
+    public DailyMenu_(String dailyMenuId, String startDate, String endDate, String name, List<Dishh> dishes) {
+        this.dailyMenuId = dailyMenuId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.name = name;
+        this.dishes = dishes;
+    }
+
+    public DailyMenu_() {
+    }
+
+    @Override
+    public String toString() {
+        return "DailyMenu_{" +
+                "dailyMenuId='" + dailyMenuId + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", name='" + name + '\'' +
+                ", dishes=" + dishes +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

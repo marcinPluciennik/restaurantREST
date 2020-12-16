@@ -66,4 +66,22 @@ public class Dish_ {
         this.additionalProperties.put(name, value);
     }
 
+    public Dish_(String dishId, String name, String price) {
+        this.dishId = dishId;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Dish_() {
+    }
+
+    @Override
+    public String toString() {
+        return "Dish_{" +
+                "dishId='" + dishId + '\'' +
+                ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

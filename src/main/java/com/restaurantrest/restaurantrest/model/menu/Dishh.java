@@ -40,4 +40,18 @@ public class Dishh {
         this.additionalProperties.put(name, value);
     }
 
+    public Dishh(Dish_ dish) {
+        this.dish = dish;
+    }
+
+    public Dishh() {
+    }
+
+    @Override
+    public String toString() {
+        return "Dishh{" +
+                "dish=" + dish +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "daily_menus",
     "status"
 })
-public class Menu {
+public class MainMenu {
 
     @JsonProperty("daily_menus")
     private List<DailyMenu> dailyMenus = null;
@@ -54,4 +54,11 @@ public class Menu {
         this.additionalProperties.put(name, value);
     }
 
+    public MainMenu(List<DailyMenu> dailyMenus, String status) {
+        this.dailyMenus = dailyMenus;
+        this.status = status;
+    }
+
+    public MainMenu() {
+    }
 }

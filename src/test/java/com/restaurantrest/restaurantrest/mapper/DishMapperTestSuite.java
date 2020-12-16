@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class DishMapperTestSuite {
     public void testMapToDishDto(){
         //Given
         Menu menu = new Menu("Desserts",
-                LocalDateTime.of(2020, 12, 11, 12, 12,12));
+                LocalDate.of(2020, 12, 11));
         Dish dish1 = new Dish("Dish1", new BigDecimal("100"));
         Dish dish2 = new Dish("Dish2", new BigDecimal("100"));
         Dish dish3 = new Dish("Dish3", new BigDecimal("100"));
