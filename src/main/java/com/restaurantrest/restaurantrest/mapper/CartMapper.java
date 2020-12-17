@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -35,9 +34,7 @@ public class CartMapper {
 
     public List<Dish> mapToDishesList(final List<Long> dishesIds) {
         return dishesIds.stream()
-                .map(dishId -> dishDao.findById(dishId))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
+                .map(dishId -> dishDao.findDishById(dishId))
                 .collect(Collectors.toList());
     }
 

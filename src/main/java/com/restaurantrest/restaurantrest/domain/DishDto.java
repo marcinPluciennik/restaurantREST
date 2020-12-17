@@ -16,5 +16,4 @@ public class DishDto {
     private String name;
     private BigDecimal price;
     private List<Long> cartsIds;
-    private Long menuId;
 }

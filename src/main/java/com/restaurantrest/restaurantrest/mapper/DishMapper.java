@@ -1,18 +1,13 @@
 package com.restaurantrest.restaurantrest.mapper;
 
 import com.restaurantrest.restaurantrest.conroller.CartNotFoundException;
-import com.restaurantrest.restaurantrest.conroller.MenuNotFoundException;
 import com.restaurantrest.restaurantrest.dao.CartDao;
-import com.restaurantrest.restaurantrest.dao.MenuDao;
 import com.restaurantrest.restaurantrest.domain.Cart;
 import com.restaurantrest.restaurantrest.domain.Dish;
 import com.restaurantrest.restaurantrest.domain.DishDto;
-import com.restaurantrest.restaurantrest.model.menu.Dish_;
-import com.restaurantrest.restaurantrest.model.menu.Dishh;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,16 +18,12 @@ public class DishMapper {
     @Autowired
     private CartDao cartDao;
 
-    @Autowired
-    private MenuDao menuDao;
-
-    public Dish mapToDish(final DishDto dishDto) throws CartNotFoundException, MenuNotFoundException {
+    public Dish mapToDish(final DishDto dishDto) throws CartNotFoundException{
         return new Dish(
                 dishDto.getDishId(),
                 dishDto.getName(),
                 dishDto.getPrice(),
-                mapToCartList(dishDto.getCartsIds()),
-                menuDao.findById(dishDto.getMenuId()).orElseThrow(MenuNotFoundException::new));
+                mapToCartList(dishDto.getCartsIds()));
     }
 
     public DishDto mapToDishDto(final Dish dish){
@@ -40,14 +31,12 @@ public class DishMapper {
                 dish.getDishId(),
                 dish.getName(),
                 dish.getPrice(),
-                mapToCartsIdsList(dish.getCartList()),
-                dish.getMenu().getMenuId());
+                mapToCartsIdsList(dish.getCartList()));
     }
 
     public List<DishDto> mapToDishDtoList(final List<Dish> dishList) {
         return dishList.stream()
-                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(), mapToCartsIdsList(d.getCartList()),
-                        d.getMenu().getMenuId()))
+                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(), mapToCartsIdsList(d.getCartList())))
                 .collect(Collectors.toList());
     }
 
@@ -68,13 +57,6 @@ public class DishMapper {
     public List<Long> mapToCartsIdsList(final List<Cart> cartList) {
         return cartList.stream()
                 .map(Cart::getCartId)
-                .collect(Collectors.toList());
-    }
-
-    public List<Dish> mapToDishListFromDishhList(final List<Dishh> dishhList) {
-        return dishhList.stream()
-                .map(d -> new Dish(Long.parseLong(d.getDish().getDishId()), d.getDish().getName(),
-                        new BigDecimal(d.getDish().getPrice().substring(0, d.getDish().getPrice().length() - 3 ))))
                 .collect(Collectors.toList());
     }
 }

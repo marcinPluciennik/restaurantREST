@@ -3,7 +3,6 @@ package com.restaurantrest.restaurantrest.mapper;
 import com.restaurantrest.restaurantrest.domain.Cart;
 import com.restaurantrest.restaurantrest.domain.Dish;
 import com.restaurantrest.restaurantrest.domain.DishDto;
-import com.restaurantrest.restaurantrest.domain.Menu;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +27,7 @@ public class DishMapperTestSuite {
     @Test
     public void testMapToDishDto(){
         //Given
-        Menu menu = new Menu("Desserts",
-                LocalDate.of(2020, 12, 11));
+
         Dish dish1 = new Dish("Dish1", new BigDecimal("100"));
         Dish dish2 = new Dish("Dish2", new BigDecimal("100"));
         Dish dish3 = new Dish("Dish3", new BigDecimal("100"));
@@ -42,7 +39,7 @@ public class DishMapperTestSuite {
         List<Cart> carts = new ArrayList<>();
         carts.add(cart);
 
-        Dish dish = new Dish(1L,"NewDish", new BigDecimal(20), carts, menu);
+        Dish dish = new Dish(1L,"NewDish", new BigDecimal(20), carts);
 
         //When
         DishDto dishDto = dishMapper.mapToDishDto(dish);

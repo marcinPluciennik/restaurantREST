@@ -39,5 +39,4 @@ public class UserMapperTestSuite {
         Assert.assertEquals("Kowalski", userDto.getSurname());
         Assert.assertEquals("111111111", userDto.getPhone());
     }
-
 }

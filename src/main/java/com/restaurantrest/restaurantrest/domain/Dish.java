@@ -33,10 +33,6 @@ public class Dish {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "dishList")
     private List<Cart> cartList = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "FK_MENU_ID")
-    private Menu menu;
-
     public Dish(Long dishId, String name, BigDecimal price) {
         this.dishId = dishId;
         this.name = name;
@@ -55,7 +51,6 @@ public class Dish {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", cartList=" + cartList +
-                ", menu=" + menu +
                 '}';
     }
 }

@@ -1,7 +1,6 @@
 package com.restaurantrest.restaurantrest.client;
 
 import com.restaurantrest.restaurantrest.domain.Dish;
-import com.restaurantrest.restaurantrest.domain.Menu;
 import com.restaurantrest.restaurantrest.domain.MyReview;
 import com.restaurantrest.restaurantrest.mapper.DishMapper;
 import com.restaurantrest.restaurantrest.model.menu.DailyMenu;
@@ -23,10 +22,10 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class RestaurantClient {
@@ -41,7 +40,7 @@ public class RestaurantClient {
     public RestaurantClient(DishMapper dishMapper) {
         this.dishMapper = dishMapper;
         this.restTemplate = new RestTemplate();
-        getMenus();
+        getDishList();
     }
 
     public List<UserReview> getUserReviews(){
@@ -121,18 +120,8 @@ public class RestaurantClient {
                         new BigDecimal(dishhListList.get(i).get(j).getDish().getPrice().substring(0, dishhListList.get(i).get(j).getDish().getPrice().length() - 3))));
             }
         }
+        Stream.of(dishList).forEach(System.out::println);
         return dishList;
     }
 
-    public List<Menu> getMenus(){
-        List<Menu> menus = new ArrayList<>();
-        getDailyMenus_().stream()
-                .map(m -> menus.add(new Menu(
-                        Long.parseLong(m.getDailyMenuId()),
-                        m.getName(),
-                        LocalDate.parse(m.getStartDate().substring(0, m.getStartDate().length() - 9)),
-                        dishMapper.mapToDishListFromDishhList(m.getDishes()))))
-                .collect(Collectors.toList());
-        return menus;
-    }
 }

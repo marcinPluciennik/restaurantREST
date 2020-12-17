@@ -5,6 +5,7 @@ import com.restaurantrest.restaurantrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -25,9 +26,6 @@ public class DbService {
     private OrderDao orderDao;
 
     @Autowired
-    private MenuDao menuDao;
-
-    @Autowired
     private MyReviewDao myReviewDao;
 
     @Autowired
@@ -41,12 +39,17 @@ public class DbService {
         return cartDao.findById(cartId);
     }
 
-    public Optional<User> findUserById(Long userId) {
-        return userDao.findById(userId);
+    public List<Cart> getCarts() {
+        return cartDao.findAll();
     }
 
-    public Optional<Dish> findDishById(Long dishId) {
-        return dishDao.findById(dishId);
+    public void removeCartById(Long id) {
+        cartDao.deleteById(id);
+    }
+
+
+    public Optional<User> findUserById(Long userId) {
+        return userDao.findById(userId);
     }
 
     public User saveUser(User user) {
@@ -60,6 +63,7 @@ public class DbService {
     public void removeUserById(Long id) {
         userDao.deleteById(id);
     }
+
 
     public Order saveOrder(Order order) {
         return orderDao.save(order);
@@ -81,41 +85,6 @@ public class DbService {
         orderDao.deleteById(id);
     }
 
-    public List<Cart> getCarts() {
-        return cartDao.findAll();
-    }
-
-    public void removeCartById(Long id) {
-        cartDao.deleteById(id);
-    }
-
-    public List<Dish> getDishes() {
-        return dishDao.findAll();
-    }
-
-    public void removeDishById(Long id) {
-        dishDao.deleteById(id);
-    }
-
-    public Dish saveDish(Dish dish) {
-        return dishDao.save(dish);
-    }
-
-    public Menu saveMenu(Menu menu) {
-        return menuDao.save(menu);
-    }
-
-    public List<Menu> getMenus() {
-        return menuDao.findAll();
-    }
-
-    public Optional<Menu> findMenuById(Long id) {
-        return menuDao.findById(id);
-    }
-
-    public void removeMenuById(Long id) {
-        menuDao.deleteById(id);
-    }
 
     public void saveTemp(Long id, LocalDate date, Double temp) {
         tempDao.saveTemp(id, date, temp);
@@ -136,6 +105,7 @@ public class DbService {
     public void updateTemp(Temp temp) {
         tempDao.updateTemp(temp);
     }
+
 
     public void saveExistingReviews(List<MyReview> reviews) {myReviewDao.saveExistingReviews(reviews); }
 
@@ -158,4 +128,29 @@ public class DbService {
     public void addOneMyReview(String reviewText, Integer rating){
         myReviewDao.save(reviewText, rating);
     }
+
+
+    public void saveExistingDishes(List<Dish> dishes) {dishDao.saveExistingDishes(dishes); }
+
+    public List<Dish> getDishes() {
+        return dishDao.findAll();
+    }
+
+    public void addOneDish(String name, BigDecimal price){
+        dishDao.save(name, price);
+    }
+
+    public void updateDish(Dish newDish) {
+        dishDao.updateDish(newDish);
+    }
+
+    public Dish findDishById(Long id) {
+        return dishDao.findDishById(id);
+    }
+
+    public boolean removeDishById(Long id) {
+        return dishDao.deleteDishById(id);
+    }
+
+
 }

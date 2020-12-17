@@ -1,6 +1,5 @@
 package com.restaurantrest.restaurantrest.dao;
 
-
 import com.restaurantrest.restaurantrest.domain.Temp;
 
 import java.time.LocalDate;

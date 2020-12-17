@@ -1,7 +1,6 @@
 package com.restaurantrest.restaurantrest.conroller;
 
 import com.restaurantrest.restaurantrest.client.WeatherClient;
-import com.restaurantrest.restaurantrest.dao.TempDao;
 import com.restaurantrest.restaurantrest.domain.TempDto;
 import com.restaurantrest.restaurantrest.mapper.TempMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
