@@ -5,6 +5,7 @@ import com.restaurantrest.restaurantrest.domain.*;
 import com.restaurantrest.restaurantrest.mapper.DishMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class DishController {
     private RestaurantClient restaurantClient;
 
 
+    @Scheduled(cron = "0 0 9 * * *")
     @RequestMapping(method = RequestMethod.POST, value = "saveDishes", consumes = APPLICATION_JSON_VALUE)
     public void saveExistingDishes(){
         service.saveExistingDishes(restaurantClient.getDishList());

@@ -79,4 +79,14 @@ public class Source {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        return "Source{" +
+                "title='" + title + '\'' +
+                ", slug='" + slug + '\'' +
+                ", url='" + url + '\'' +
+                ", crawlRate=" + crawlRate +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

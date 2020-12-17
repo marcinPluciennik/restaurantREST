@@ -44,7 +44,6 @@ public class RestaurantClient {
         this.dishMapper = dishMapper;
         this.restaurantConfig = restaurantConfig;
         this.restTemplate = new RestTemplate();
-        getDishList();
     }
 
     public List<UserReview> getUserReviews(){

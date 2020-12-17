@@ -184,4 +184,40 @@ public class PragueWeather {
         this.additionalProperties.put(name, value);
     }
 
+    public PragueWeather(List<ConsolidatedWeather> consolidatedWeather, String time, String sunRise, String sunSet, String timezoneName, Parent parent, List<Source> sources, String title, String locationType, Integer woeid, String lattLong, String timezone) {
+        this.consolidatedWeather = consolidatedWeather;
+        this.time = time;
+        this.sunRise = sunRise;
+        this.sunSet = sunSet;
+        this.timezoneName = timezoneName;
+        this.parent = parent;
+        this.sources = sources;
+        this.title = title;
+        this.locationType = locationType;
+        this.woeid = woeid;
+        this.lattLong = lattLong;
+        this.timezone = timezone;
+    }
+
+    public PragueWeather() {
+    }
+
+    @Override
+    public String toString() {
+        return "PragueWeather{" +
+                "consolidatedWeather=" + consolidatedWeather +
+                ", time='" + time + '\'' +
+                ", sunRise='" + sunRise + '\'' +
+                ", sunSet='" + sunSet + '\'' +
+                ", timezoneName='" + timezoneName + '\'' +
+                ", parent=" + parent +
+                ", sources=" + sources +
+                ", title='" + title + '\'' +
+                ", locationType='" + locationType + '\'' +
+                ", woeid=" + woeid +
+                ", lattLong='" + lattLong + '\'' +
+                ", timezone='" + timezone + '\'' +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

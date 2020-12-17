@@ -79,4 +79,14 @@ public class Parent {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        return "Parent{" +
+                "title='" + title + '\'' +
+                ", locationType='" + locationType + '\'' +
+                ", woeid=" + woeid +
+                ", lattLong='" + lattLong + '\'' +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

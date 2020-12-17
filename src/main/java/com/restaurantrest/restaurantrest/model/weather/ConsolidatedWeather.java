@@ -222,4 +222,34 @@ public class ConsolidatedWeather {
         this.additionalProperties.put(name, value);
     }
 
+    public ConsolidatedWeather(Long id, String applicableDate, Double theTemp) {
+        this.id = id;
+        this.applicableDate = applicableDate;
+        this.theTemp = theTemp;
+    }
+
+    public ConsolidatedWeather() {
+    }
+
+    @Override
+    public String toString() {
+        return "ConsolidatedWeather{" +
+                "id=" + id +
+                ", weatherStateName='" + weatherStateName + '\'' +
+                ", weatherStateAbbr='" + weatherStateAbbr + '\'' +
+                ", windDirectionCompass='" + windDirectionCompass + '\'' +
+                ", created='" + created + '\'' +
+                ", applicableDate='" + applicableDate + '\'' +
+                ", minTemp=" + minTemp +
+                ", maxTemp=" + maxTemp +
+                ", theTemp=" + theTemp +
+                ", windSpeed=" + windSpeed +
+                ", windDirection=" + windDirection +
+                ", airPressure=" + airPressure +
+                ", humidity=" + humidity +
+                ", visibility=" + visibility +
+                ", predictability=" + predictability +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

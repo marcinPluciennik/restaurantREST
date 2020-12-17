@@ -1,5 +1,6 @@
 package com.restaurantrest.restaurantrest.client;
 
+import com.restaurantrest.restaurantrest.config.WeatherConfig;
 import com.restaurantrest.restaurantrest.model.weather.ConsolidatedWeather;
 import com.restaurantrest.restaurantrest.model.weather.PragueWeather;
 import org.slf4j.Logger;
@@ -13,18 +14,21 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class WeatherClient {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WeatherClient.class);
+    private WeatherConfig weatherConfig;
 
     private RestTemplate restTemplate;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeatherClient.class);
+
     @Autowired
-    public WeatherClient() {
+    public WeatherClient(WeatherConfig weatherConfig) {
+        this.weatherConfig = weatherConfig;
         this.restTemplate = new RestTemplate();
     }
 
     public PragueWeather getWeatherInPrague(){
         try{
-            PragueWeather weatherInPrague = restTemplate.getForObject("https://www.metaweather.com/api/location/796597",
+            PragueWeather weatherInPrague = restTemplate.getForObject(weatherConfig.getWeatherAppEndPoint(),
                     PragueWeather.class);
             return weatherInPrague;
         }catch (RestClientException e){

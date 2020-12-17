@@ -6,6 +6,7 @@ import com.restaurantrest.restaurantrest.mapper.TempMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class TempController {
     @Autowired
     private WeatherClient weatherClient;
 
+    @Scheduled(cron = "0 0 9 * * *")
     @RequestMapping(method = RequestMethod.POST, value = "saveTemp", consumes = APPLICATION_JSON_VALUE)
     public void saveTemp(){
         service.saveTemp(
