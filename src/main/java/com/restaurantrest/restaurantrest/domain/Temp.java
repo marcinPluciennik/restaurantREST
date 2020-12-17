@@ -28,10 +28,6 @@ public class Temp {
     @Column(name = "TEMP")
     private double temp;
 
-    public Temp(double temp) {
-        this.date = LocalDate.now();
-        this.temp = temp;
-    }
     public Temp(LocalDate date, double temp) {
         this.date = date;
         this.temp = temp;

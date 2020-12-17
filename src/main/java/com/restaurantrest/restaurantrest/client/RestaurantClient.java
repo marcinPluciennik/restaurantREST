@@ -1,5 +1,6 @@
 package com.restaurantrest.restaurantrest.client;
 
+import com.restaurantrest.restaurantrest.config.RestaurantConfig;
 import com.restaurantrest.restaurantrest.domain.Dish;
 import com.restaurantrest.restaurantrest.domain.MyReview;
 import com.restaurantrest.restaurantrest.mapper.DishMapper;
@@ -36,16 +37,19 @@ public class RestaurantClient {
 
     private DishMapper dishMapper;
 
+    private RestaurantConfig restaurantConfig;
+
     @Autowired
-    public RestaurantClient(DishMapper dishMapper) {
+    public RestaurantClient(DishMapper dishMapper, RestaurantConfig restaurantConfig) {
         this.dishMapper = dishMapper;
+        this.restaurantConfig = restaurantConfig;
         this.restTemplate = new RestTemplate();
         getDishList();
     }
 
     public List<UserReview> getUserReviews(){
         MultiValueMap<String, String> headers = new HttpHeaders();
-        headers.add("user-key", "482c662e46d7577aedbac1daeb21ba25");
+        headers.add("user-key", restaurantConfig.getZomatoAppUserKey());
         HttpEntity httpEntity = new HttpEntity(headers);
 
         try{
@@ -64,14 +68,14 @@ public class RestaurantClient {
     public List<MyReview> getReviews(){
         List<MyReview> myReviews = new ArrayList<>();
         getUserReviews().stream()
-                .map(r -> myReviews.add(new MyReview(r.getReview().getId(), r.getReview().getRatingText(), r.getReview().getRating())))
+                .map(r -> myReviews.add(new MyReview(r.getReview().getRatingText(), r.getReview().getRating())))
                 .collect(Collectors.toList());
         return myReviews;
     }
 
     public List<DailyMenu> getDailyMenus(){
         MultiValueMap<String, String> headers = new HttpHeaders();
-        headers.add("user-key", "482c662e46d7577aedbac1daeb21ba25");
+        headers.add("user-key", restaurantConfig.getZomatoAppUserKey());
         HttpEntity httpEntity = new HttpEntity(headers);
 
         try{
@@ -115,7 +119,6 @@ public class RestaurantClient {
         for (int i = 0; i < dishhListList.size(); i++){
             for(int j = 0; j < dishhListList.get(i).size();j++){
                 dishList.add(new Dish(
-                        Long.parseLong(dishhListList.get(i).get(j).getDish().getDishId()),
                         dishhListList.get(i).get(j).getDish().getName(),
                         new BigDecimal(dishhListList.get(i).get(j).getDish().getPrice().substring(0, dishhListList.get(i).get(j).getDish().getPrice().length() - 3))));
             }
@@ -123,5 +126,4 @@ public class RestaurantClient {
         Stream.of(dishList).forEach(System.out::println);
         return dishList;
     }
-
 }

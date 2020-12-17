@@ -29,9 +29,9 @@ public class TempDaoImpl implements TempDao {
     }
 
     @Override
-    public void saveTemp(long temp_id, LocalDate date, double temp) {
+    public void saveTemp(LocalDate date, double temp) {
         try{
-            Temp tempToSave = new Temp(temp_id, date, temp);
+            Temp tempToSave = new Temp(date, temp);
             String sql = "INSERT INTO temp_prague VALUES(?, ?, ?)";
             jdbcTemplate.update(sql, tempToSave.getTempId(), tempToSave.getDate(), tempToSave.getTemp());
         }catch (RestClientException e){

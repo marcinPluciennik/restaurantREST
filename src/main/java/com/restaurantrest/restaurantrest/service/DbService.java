@@ -86,8 +86,8 @@ public class DbService {
     }
 
 
-    public void saveTemp(Long id, LocalDate date, Double temp) {
-        tempDao.saveTemp(id, date, temp);
+    public void saveTemp(LocalDate date, Double temp) {
+        tempDao.saveTemp(date, temp);
     }
 
     public List<Temp> getTemps() {

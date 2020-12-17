@@ -27,7 +27,7 @@ public class TempController {
 
     @RequestMapping(method = RequestMethod.POST, value = "saveTemp", consumes = APPLICATION_JSON_VALUE)
     public void saveTemp(){
-        service.saveTemp(weatherClient.getConsolidatedWeather().getId(),
+        service.saveTemp(
                 LocalDate.parse(weatherClient.getConsolidatedWeather().getApplicableDate()),
                 weatherClient.getConsolidatedWeather().getTheTemp());
     }

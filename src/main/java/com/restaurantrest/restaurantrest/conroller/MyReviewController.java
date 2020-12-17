@@ -49,7 +49,7 @@ public class MyReviewController {
         service.addOneMyReview(myReviewDto.getReviewText(), myReviewDto.getRating());
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "saveReviews", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "saveMyReviews", consumes = APPLICATION_JSON_VALUE)
     public void saveExistingReviews(){
         service.saveExistingReviews(restaurantClient.getReviews());
     }
