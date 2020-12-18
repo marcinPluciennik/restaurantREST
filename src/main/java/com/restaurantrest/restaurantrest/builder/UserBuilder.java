@@ -1,4 +1,7 @@
-package com.restaurantrest.restaurantrest.domain;
+package com.restaurantrest.restaurantrest.builder;
+
+import com.restaurantrest.restaurantrest.domain.Order;
+import com.restaurantrest.restaurantrest.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

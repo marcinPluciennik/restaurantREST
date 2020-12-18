@@ -231,6 +231,24 @@ public class ConsolidatedWeather {
     public ConsolidatedWeather() {
     }
 
+    public ConsolidatedWeather(Long id, String weatherStateName, String weatherStateAbbr, String windDirectionCompass, String created, String applicableDate, Double minTemp, Double maxTemp, Double theTemp, Double windSpeed, Double windDirection, Double airPressure, Integer humidity, Double visibility, Integer predictability) {
+        this.id = id;
+        this.weatherStateName = weatherStateName;
+        this.weatherStateAbbr = weatherStateAbbr;
+        this.windDirectionCompass = windDirectionCompass;
+        this.created = created;
+        this.applicableDate = applicableDate;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+        this.theTemp = theTemp;
+        this.windSpeed = windSpeed;
+        this.windDirection = windDirection;
+        this.airPressure = airPressure;
+        this.humidity = humidity;
+        this.visibility = visibility;
+        this.predictability = predictability;
+    }
+
     @Override
     public String toString() {
         return "ConsolidatedWeather{" +

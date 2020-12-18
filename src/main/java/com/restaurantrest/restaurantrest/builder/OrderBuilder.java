@@ -1,4 +1,8 @@
-package com.restaurantrest.restaurantrest.domain;
+package com.restaurantrest.restaurantrest.builder;
+
+import com.restaurantrest.restaurantrest.domain.Cart;
+import com.restaurantrest.restaurantrest.domain.Order;
+import com.restaurantrest.restaurantrest.domain.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class RestaurantClient {
+public class RestaurantClient{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RestaurantClient.class);
 

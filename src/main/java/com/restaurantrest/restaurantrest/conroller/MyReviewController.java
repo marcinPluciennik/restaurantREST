@@ -5,7 +5,6 @@ import com.restaurantrest.restaurantrest.domain.MyReviewDto;
 import com.restaurantrest.restaurantrest.mapper.MyReviewMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +49,6 @@ public class MyReviewController {
         service.addOneMyReview(myReviewDto.getReviewText(), myReviewDto.getRating());
     }
 
-    @Scheduled(cron = "0 0 9 * * *")
     @RequestMapping(method = RequestMethod.POST, value = "saveMyReviews", consumes = APPLICATION_JSON_VALUE)
     public void saveExistingReviews(){
         service.saveExistingReviews(restaurantClient.getReviews());
