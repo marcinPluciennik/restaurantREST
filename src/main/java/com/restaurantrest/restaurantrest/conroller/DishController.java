@@ -25,7 +25,6 @@ public class DishController {
     @Autowired
     private RestaurantClient restaurantClient;
 
-
     @Scheduled(cron = "0 0 9 * * *")
     @RequestMapping(method = RequestMethod.POST, value = "saveDishes", consumes = APPLICATION_JSON_VALUE)
     public void saveExistingDishes(){

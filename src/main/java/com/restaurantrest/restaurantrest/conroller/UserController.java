@@ -5,9 +5,11 @@ import com.restaurantrest.restaurantrest.domain.UserDto;
 import com.restaurantrest.restaurantrest.mapper.UserMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Observable;
 import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -23,7 +25,8 @@ public class UserController {
     private DbService service;
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
-    public UserDto createUser(@RequestBody UserDto userDto){
+    public UserDto createUser(@RequestBody UserDto userDto, Observable observable){
+        observable.notify();
         return userMapper.mapToUserDto(service.saveUser(userMapper.mapToUser(userDto)));
     }
 

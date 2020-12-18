@@ -16,53 +16,31 @@ import java.time.Month;
 public class Start {
 
     @Autowired
-    public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, DishDao dishDao,
-                 MyReviewDao myReviewDao, TempController tempController, MyReviewController myReviewController) {
-
+    public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, DishDao dishDao, MyReviewController myReviewController) {
 
         myReviewController.saveExistingReviews();
 
-        tempController.saveTemp();
-
-
-        Cart cart1 = new Cart();
-        Cart cart2 = new Cart();
-
-
-//        Dish dish1 = new Dish("Schabowy", new BigDecimal("14.5"));
-//        Dish dish2 = new Dish("Ziemniaki", new BigDecimal("4.5"));
-
-
-//        dish1.getCartList().add(cart1);
-//        dish2.getCartList().add(cart2);
-//        cart1.getDishList().add(dish1);
-//        cart2.getDishList().add(dish2);
-
-
+        Cart cart1 = new CartBuilder().createCart();
+        Cart cart2 = new CartBuilder().createCart();
 
         cartDao.save(cart1);
         cartDao.save(cart2);
 
-//        dishDao.save(dish1);
-//        dishDao.save(dish2);
-
-
-        User user1 = new User("Adam", "Kowalski", "123123123", "bla@gmail.com");
-        User user2 = new User("Wojtek", "Tarnowski", "345345345", "wt@gmail.com");
-
+        User user1 = new UserBuilder().setName("Adam").setSurname("Kowalski").setPhone("123123123")
+                .setEmail("bla@gmail.com").createUser();
+        User user2 = new UserBuilder().setName("Wojtek").setSurname("Tarnowski").setPhone("345345345")
+                .setEmail("wt@gmail.com").createUser();
         userDao.save(user1);
         userDao.save(user2);
 
-
-        Order order1 = new Order(new BigDecimal(10.40));
+        Order order1 = new OrderBuilder().setTotalPrice(new BigDecimal(10.40)).createOrder();
         order1.setCart(cart1);
         order1.setUser(user1);
-        Order order2 = new Order(new BigDecimal(200.90));
+        Order order2 = new OrderBuilder().setTotalPrice(new BigDecimal(200.40)).createOrder();
         order2.setCart(cart2);
         order2.setUser(user2);
 
         orderDao.save(order1);
         orderDao.save(order2);
-
     }
 }
