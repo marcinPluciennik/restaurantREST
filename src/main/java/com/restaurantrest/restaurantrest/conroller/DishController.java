@@ -52,7 +52,7 @@ public class DishController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "removeDish/{dishId}")
-    public boolean removeMyReviewById(@PathVariable Long dishId) {
+    public boolean removeDishById(@PathVariable Long dishId) {
         return service.removeDishById(dishId);
     }
 }
