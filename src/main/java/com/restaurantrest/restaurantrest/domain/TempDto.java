@@ -13,4 +13,9 @@ public class TempDto {
     private Long tempId;
     private LocalDate date;
     private double temp;
+
+    public TempDto(Long tempId, double temp) {
+        this.tempId = tempId;
+        this.temp = temp;
+    }
 }

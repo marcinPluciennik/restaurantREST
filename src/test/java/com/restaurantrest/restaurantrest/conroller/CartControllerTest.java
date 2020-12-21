@@ -1,10 +1,7 @@
 package com.restaurantrest.restaurantrest.conroller;
 
 import com.google.gson.Gson;
-import com.restaurantrest.restaurantrest.domain.Cart;
-import com.restaurantrest.restaurantrest.domain.CartDto;
-import com.restaurantrest.restaurantrest.domain.Dish;
-import com.restaurantrest.restaurantrest.domain.DishDto;
+import com.restaurantrest.restaurantrest.domain.*;
 import com.restaurantrest.restaurantrest.mapper.CartMapper;
 import com.restaurantrest.restaurantrest.mapper.DishMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
@@ -20,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -29,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -112,8 +111,41 @@ public class CartControllerTest {
     @Test
     public void shouldDeleteCartById() throws Exception{
         //Given
+        List<Cart> cartList = new ArrayList<>();
+        List<Dish> dishes = new ArrayList<>();
+        Cart cart = new Cart(1L, dishes);
+        cartList.add(cart);
+        Long cartId = cart.getCartId();
+
+        when(service.getCarts()).thenReturn(cartList);
+        doNothing().when(service).removeCartById(cartId);
+
         //When & Then
         mockMvc.perform(delete("/carts/removeCart/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldDeleteDishFromCartById() throws Exception{
+        //Given
+        List<Dish> dishes = new ArrayList<>();
+        Dish dish = new Dish(1L, "test1", new BigDecimal(100), new ArrayList<>());
+        dishes.add(dish);
+
+        List<Cart> cartList = new ArrayList<>();
+        Cart cart = new Cart(1L, dishes);
+        cartList.add(cart);
+        Long cartId = cart.getCartId();
+        Optional<Cart> cartOptional = Optional.of(cart);
+        CartDto cartDto = new CartDto(1L, new ArrayList<>());
+
+        when(service.findCartById(cartId)).thenReturn(cartOptional);
+        when(service.saveCart(cart)).thenReturn(cart);
+        when(cartMapper.mapToCartDto(cart)).thenReturn(cartDto);
+
+        //When & Then
+        mockMvc.perform(delete("/carts/removeDish/1/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

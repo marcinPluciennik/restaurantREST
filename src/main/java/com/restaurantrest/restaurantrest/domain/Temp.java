@@ -32,4 +32,9 @@ public class Temp {
         this.date = date;
         this.temp = temp;
     }
+
+    public Temp(Long tempId, double temp) {
+        this.tempId = tempId;
+        this.temp = temp;
+    }
 }

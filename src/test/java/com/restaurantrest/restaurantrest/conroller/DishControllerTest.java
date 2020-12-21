@@ -1,8 +1,8 @@
 package com.restaurantrest.restaurantrest.conroller;
 
+import com.google.gson.Gson;
 import com.restaurantrest.restaurantrest.client.RestaurantClient;
-import com.restaurantrest.restaurantrest.domain.Dish;
-import com.restaurantrest.restaurantrest.domain.DishDto;
+import com.restaurantrest.restaurantrest.domain.*;
 import com.restaurantrest.restaurantrest.mapper.DishMapper;
 import com.restaurantrest.restaurantrest.service.DbService;
 import org.junit.Test;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -88,7 +89,10 @@ public class DishControllerTest {
                 .andExpect(jsonPath("$[2].dishId", is(3)))
                 .andExpect(jsonPath("$[0].name", is("test1")))
                 .andExpect(jsonPath("$[1].name", is("test2")))
-                .andExpect(jsonPath("$[2].name", is("test3")));
+                .andExpect(jsonPath("$[2].name", is("test3")))
+                .andExpect(jsonPath("$[0].price", is(100)))
+                .andExpect(jsonPath("$[1].price", is(200)))
+                .andExpect(jsonPath("$[2].price", is(300)));
     }
 
     @Test
@@ -112,9 +116,79 @@ public class DishControllerTest {
     @Test
     public void shouldDeleteDishById() throws Exception{
         //Given
+        Dish dish = new Dish(1L, "test", new BigDecimal(100), new ArrayList<>());
+        Long dishId = dish.getDishId();
+        List<Dish> dishList = new ArrayList<>();
+        dishList.add(dish);
+
+        when(service.removeDishById(dishId)).thenReturn(true);
+
         //When & Then
         mockMvc.perform(delete("/dishes/removeDish/1")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldCreateDish() throws Exception{
+        //Given
+        DishDto dishDto = new DishDto(1L, "test", new BigDecimal(100), new ArrayList<>());
+
+        doNothing().when(service).addOneDish(dishDto.getName(), dishDto.getPrice());
+
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(dishDto);
+
+        //When & Then
+        mockMvc.perform(post("/dishes/addDish")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldEditDish() throws Exception{
+        //Given
+        DishDto dishDto = new DishDto(1L, "test", new BigDecimal(100), new ArrayList<>());
+        Dish dish = new Dish(1L, "test", new BigDecimal(100), new ArrayList<>());
+
+        when(dishMapper.mapToDish(dishDto)).thenReturn(dish);
+        doNothing().when(service).updateDish(dish);
+
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(dishDto);
+
+        //When & Then
+        mockMvc.perform(put("/dishes/editDish")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldSaveDishes() throws Exception{
+        //Given
+        List<Dish> dishList = new ArrayList<>();
+        Dish dish1 = new Dish(1L, "test1", new BigDecimal(100), new ArrayList<>());
+        Dish dish2 = new Dish(2L, "test2", new BigDecimal(200), new ArrayList<>());
+        Dish dish3 = new Dish(3L, "test3", new BigDecimal(300), new ArrayList<>());
+        dishList.add(dish1);
+        dishList.add(dish2);
+        dishList.add(dish3);
+
+        when(restaurantClient.getDishList()).thenReturn(dishList);
+        doNothing().when(service).saveExistingDishes(dishList);
+
+        Gson gson = new Gson();
+        String jsonContent = gson.toJson(dishList);
+
+        //When & Then
+        mockMvc.perform(post("/dishes/saveDishes")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(jsonContent))
                 .andExpect(status().isOk());
     }
 }

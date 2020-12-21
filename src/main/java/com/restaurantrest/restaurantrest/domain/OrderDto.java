@@ -17,4 +17,8 @@ public class OrderDto {
     private BigDecimal totalPrice;
     private Long userId;
     private Long cartId;
+
+    public OrderDto(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
