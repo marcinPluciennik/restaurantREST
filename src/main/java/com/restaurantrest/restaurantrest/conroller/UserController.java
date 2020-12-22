@@ -24,8 +24,7 @@ public class UserController {
     private DbService service;
 
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
-    public UserDto createUser(@RequestBody UserDto userDto, Observable observable){
-        observable.notify();
+    public UserDto createUser(@RequestBody UserDto userDto){
         return userMapper.mapToUserDto(service.saveUser(userMapper.mapToUser(userDto)));
     }
 
