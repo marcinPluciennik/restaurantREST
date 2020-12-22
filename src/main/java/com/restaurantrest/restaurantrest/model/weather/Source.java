@@ -89,4 +89,11 @@ public class Source {
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
+
+    public Source(String title, String slug, String url, Integer crawlRate) {
+        this.title = title;
+        this.slug = slug;
+        this.url = url;
+        this.crawlRate = crawlRate;
+    }
 }

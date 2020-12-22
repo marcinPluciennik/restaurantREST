@@ -26,7 +26,6 @@ public class DishMapperTestSuite {
     @Test
     public void testMapToDishDto(){
         //Given
-
         Dish dish1 = new Dish("Dish1", new BigDecimal("100"));
         Dish dish2 = new Dish("Dish2", new BigDecimal("100"));
         Dish dish3 = new Dish("Dish3", new BigDecimal("100"));
@@ -49,4 +48,80 @@ public class DishMapperTestSuite {
         Assert.assertEquals(1, dishDto.getCartsIds().size());
     }
 
+    @Test
+    public void testMapToDish(){
+        //Given
+        DishDto dishDto = new DishDto(1L,"Dish1", new BigDecimal("100"), new ArrayList<>());
+
+        //When
+        Dish dish = dishMapper.mapToDish(dishDto);
+
+        //Then
+        long id  = dish.getDishId();
+        Assert.assertEquals(1L, id);
+        Assert.assertEquals("Dish1", dish.getName());
+        Assert.assertEquals(new BigDecimal(100), dish.getPrice());
+    }
+
+    @Test
+    public void testMapToDishDtoList(){
+        //Given
+        Dish dish1 = new Dish(1L,"Dish1", new BigDecimal("100"), new ArrayList<>());
+        Dish dish2 = new Dish(2L,"Dish2", new BigDecimal("100"), new ArrayList<>());
+        Dish dish3 = new Dish(3L,"Dish3", new BigDecimal("100"), new ArrayList<>());
+        List<Dish> dishes = new ArrayList<>();
+        dishes.add(dish1);
+        dishes.add(dish2);
+        dishes.add(dish3);
+
+        //When
+        List<DishDto> dishDtoList = dishMapper.mapToDishDtoList(dishes);
+
+        //Then
+        long id  = dishDtoList.get(0).getDishId();
+        Assert.assertEquals(1L, id);
+        Assert.assertEquals("Dish1", dishDtoList.get(0).getName());
+        Assert.assertEquals(new BigDecimal(100), dishDtoList.get(0).getPrice());
+    }
+
+    @Test
+    public void testMapToDishList(){
+        //Given
+        DishDto dishDto1 = new DishDto(1L,"Dish1", new BigDecimal("100"), new ArrayList<>());
+        DishDto dishDto2 = new DishDto(2L,"Dish2", new BigDecimal("100"), new ArrayList<>());
+        DishDto dishDto3 = new DishDto(3L,"Dish3", new BigDecimal("100"), new ArrayList<>());
+        List<DishDto> dishDtoList = new ArrayList<>();
+        dishDtoList.add(dishDto1);
+        dishDtoList.add(dishDto2);
+        dishDtoList.add(dishDto3);
+
+        //When
+        List<Dish> dishList = dishMapper.mapToDishList(dishDtoList);
+
+        //Then
+        long id  = dishList.get(0).getDishId();
+        Assert.assertEquals(1L, id);
+        Assert.assertEquals("Dish1", dishList.get(0).getName());
+        Assert.assertEquals(new BigDecimal(100), dishList.get(0).getPrice());
+    }
+
+    @Test
+    public void testMapToCartsIdsList(){
+        //Given
+        Cart cart1 = new Cart(1L, new ArrayList<>());
+        Cart cart2 = new Cart(2L, new ArrayList<>());
+        Cart cart3 = new Cart(3L, new ArrayList<>());
+        List<Cart> cartList = new ArrayList<>();
+        cartList.add(cart1);
+        cartList.add(cart2);
+        cartList.add(cart3);
+
+        //When
+        List<Long> cartsIdsList = dishMapper.mapToCartsIdsList(cartList);
+
+        //Then
+        long id  = cartsIdsList.get(0);
+        Assert.assertEquals(1L, id);
+        Assert.assertEquals(3, cartsIdsList.size());
+    }
 }

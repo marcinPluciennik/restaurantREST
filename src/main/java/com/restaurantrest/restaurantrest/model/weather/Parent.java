@@ -89,4 +89,11 @@ public class Parent {
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
+
+    public Parent(String title, String locationType, Integer woeid, String lattLong) {
+        this.title = title;
+        this.locationType = locationType;
+        this.woeid = woeid;
+        this.lattLong = lattLong;
+    }
 }

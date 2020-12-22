@@ -36,7 +36,8 @@ public class DishMapper {
 
     public List<DishDto> mapToDishDtoList(final List<Dish> dishList) {
         return dishList.stream()
-                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(), mapToCartsIdsList(d.getCartList())))
+                .map(d -> new DishDto(d.getDishId(), d.getName(), d.getPrice(),
+                        mapToCartsIdsList(d.getCartList())))
                 .collect(Collectors.toList());
     }
 

@@ -16,4 +16,10 @@ public class DishDto {
     private String name;
     private BigDecimal price;
     private List<Long> cartsIds;
+
+    public DishDto(Long dishId, String name, BigDecimal price) {
+        this.dishId = dishId;
+        this.name = name;
+        this.price = price;
+    }
 }
