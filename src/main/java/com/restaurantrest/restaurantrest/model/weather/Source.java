@@ -96,4 +96,7 @@ public class Source {
         this.url = url;
         this.crawlRate = crawlRate;
     }
+
+    public Source() {
+    }
 }

@@ -96,4 +96,7 @@ public class Parent {
         this.woeid = woeid;
         this.lattLong = lattLong;
     }
+
+    public Parent() {
+    }
 }
