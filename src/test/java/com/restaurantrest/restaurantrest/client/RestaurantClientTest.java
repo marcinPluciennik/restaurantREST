@@ -1,9 +1,7 @@
 package com.restaurantrest.restaurantrest.client;
 
 import com.restaurantrest.restaurantrest.config.RestaurantConfig;
-import com.restaurantrest.restaurantrest.model.menu.DailyMenu;
-import com.restaurantrest.restaurantrest.model.menu.DailyMenu_;
-import com.restaurantrest.restaurantrest.model.menu.MainMenu;
+import com.restaurantrest.restaurantrest.model.menu.*;
 import com.restaurantrest.restaurantrest.model.review.Review;
 import com.restaurantrest.restaurantrest.model.review.Reviews;
 import com.restaurantrest.restaurantrest.model.review.User;
@@ -119,5 +117,21 @@ public class RestaurantClientTest {
         assertEquals("endDate", fetchedDailyMenus.get(0).getDailyMenu().getEndDate());
         assertEquals("name", fetchedDailyMenus.get(0).getDailyMenu().getName());
         assertEquals(new ArrayList<>(), fetchedDailyMenus.get(0).getDailyMenu().getDishes());
+    }
+
+    @Test
+    public void shouldFetchDishhList(){
+        //Given
+        Dish_ dish_ = new Dish_("dishId", "name", "price");
+        Dishh dishh = new Dishh(dish_);
+        List<Dishh> dishhList = new ArrayList<>();
+        dishhList.add(dishh);
+        List<List<Dishh>> dishhListList = new ArrayList<>();
+        dishhListList.add(dishhList);
+        //When //Then
+        assertEquals(1, dishhListList.size());
+        assertEquals("dishId", dishhListList.get(0).get(0).getDish().getDishId());
+        assertEquals("price", dishhListList.get(0).get(0).getDish().getPrice());
+        assertEquals("name", dishhListList.get(0).get(0).getDish().getName());
     }
 }
