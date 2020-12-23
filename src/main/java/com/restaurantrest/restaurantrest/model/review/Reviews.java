@@ -91,4 +91,14 @@ public class Reviews {
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
+
+    public Reviews(Integer reviewsCount, Integer reviewsStart, Integer reviewsShown, List<UserReview> userReviews) {
+        this.reviewsCount = reviewsCount;
+        this.reviewsStart = reviewsStart;
+        this.reviewsShown = reviewsShown;
+        this.userReviews = userReviews;
+    }
+
+    public Reviews() {
+    }
 }

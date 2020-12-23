@@ -48,4 +48,11 @@ public class UserReview {
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
+
+    public UserReview(Review review) {
+        this.review = review;
+    }
+
+    public UserReview() {
+    }
 }

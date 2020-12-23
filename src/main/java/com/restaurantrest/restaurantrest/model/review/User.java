@@ -131,4 +131,17 @@ public class User {
         this.additionalProperties.put(name, value);
     }
 
+    public User(String name, String foodieColor, String profileUrl, String profileImage, String profileDeeplink, String zomatoHandle, String foodieLevel, Integer foodieLevelNum) {
+        this.name = name;
+        this.foodieColor = foodieColor;
+        this.profileUrl = profileUrl;
+        this.profileImage = profileImage;
+        this.profileDeeplink = profileDeeplink;
+        this.zomatoHandle = zomatoHandle;
+        this.foodieLevel = foodieLevel;
+        this.foodieLevelNum = foodieLevelNum;
+    }
+
+    public User() {
+    }
 }

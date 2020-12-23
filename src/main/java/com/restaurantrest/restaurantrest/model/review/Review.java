@@ -174,4 +174,20 @@ public class Review {
                 ", additionalProperties=" + additionalProperties +
                 '}';
     }
+
+    public Review(Integer rating, String reviewText, Long id, String ratingColor, String reviewTimeFriendly, String ratingText, Integer timestamp, Integer likes, User user, Integer commentsCount) {
+        this.rating = rating;
+        this.reviewText = reviewText;
+        this.id = id;
+        this.ratingColor = ratingColor;
+        this.reviewTimeFriendly = reviewTimeFriendly;
+        this.ratingText = ratingText;
+        this.timestamp = timestamp;
+        this.likes = likes;
+        this.user = user;
+        this.commentsCount = commentsCount;
+    }
+
+    public Review() {
+    }
 }
