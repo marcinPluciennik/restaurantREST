@@ -3,6 +3,7 @@ package com.restaurantrest.restaurantrest;
 import com.restaurantrest.restaurantrest.builder.CartBuilder;
 import com.restaurantrest.restaurantrest.builder.OrderBuilder;
 import com.restaurantrest.restaurantrest.builder.UserBuilder;
+import com.restaurantrest.restaurantrest.conroller.DishController;
 import com.restaurantrest.restaurantrest.conroller.MyReviewController;
 import com.restaurantrest.restaurantrest.dao.*;
 import com.restaurantrest.restaurantrest.domain.*;
@@ -16,9 +17,11 @@ import java.math.BigDecimal;
 public class Start {
 
     @Autowired
-    public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, MyReviewController myReviewController) {
+    public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, MyReviewController myReviewController,
+                 DishController dishController) {
 
         myReviewController.saveExistingReviews();
+        dishController.saveExistingDishes();
 
         Cart cart1 = new CartBuilder().createCart();
         Cart cart2 = new CartBuilder().createCart();
