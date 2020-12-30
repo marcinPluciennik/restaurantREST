@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 
 @Component
@@ -24,7 +25,6 @@ public class Start {
         myReviewController.saveExistingReviews();
         dishController.saveExistingDishes();
         tempController.saveTemp();
-
 
         Cart cart1 = new CartBuilder().createCart();
         Cart cart2 = new CartBuilder().createCart();
@@ -39,14 +39,10 @@ public class Start {
         userDao.save(user1);
         userDao.save(user2);
 
-        Order order1 = new OrderBuilder().setTotalPrice(new BigDecimal(10.40)).createOrder();
+        Order order1 = new OrderBuilder().setOrderDate(LocalDate.now()).setTotalPrice(new BigDecimal(10.40)).createOrder();
         order1.setCart(cart1);
         order1.setUser(user1);
-        Order order2 = new OrderBuilder().setTotalPrice(new BigDecimal(200.40)).createOrder();
-        order2.setCart(cart2);
-        order2.setUser(user2);
-
         orderDao.save(order1);
-        orderDao.save(order2);
+
     }
 }
