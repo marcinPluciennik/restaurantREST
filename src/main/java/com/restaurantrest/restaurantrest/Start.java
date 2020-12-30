@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
 @Component
 public class Start {
 
@@ -43,6 +42,5 @@ public class Start {
         order1.setCart(cart1);
         order1.setUser(user1);
         orderDao.save(order1);
-
     }
 }
