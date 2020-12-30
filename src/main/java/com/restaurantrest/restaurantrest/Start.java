@@ -5,6 +5,7 @@ import com.restaurantrest.restaurantrest.builder.OrderBuilder;
 import com.restaurantrest.restaurantrest.builder.UserBuilder;
 import com.restaurantrest.restaurantrest.conroller.DishController;
 import com.restaurantrest.restaurantrest.conroller.MyReviewController;
+import com.restaurantrest.restaurantrest.conroller.TempController;
 import com.restaurantrest.restaurantrest.dao.*;
 import com.restaurantrest.restaurantrest.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,12 @@ public class Start {
 
     @Autowired
     public Start(UserDao userDao, CartDao cartDao, OrderDao orderDao, MyReviewController myReviewController,
-                 DishController dishController) {
+                 DishController dishController, TempController tempController) {
 
         myReviewController.saveExistingReviews();
         dishController.saveExistingDishes();
+        tempController.saveTemp();
+
 
         Cart cart1 = new CartBuilder().createCart();
         Cart cart2 = new CartBuilder().createCart();
